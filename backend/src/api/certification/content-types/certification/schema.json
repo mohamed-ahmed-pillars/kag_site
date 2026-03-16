@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "certifications",
+  "info": {
+    "singularName": "certification",
+    "pluralName": "certifications",
+    "displayName": "Certification"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name_en": {
+      "type": "string",
+      "required": true
+    },
+    "name_ar": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "issuing_body_en": {
+      "type": "string"
+    },
+    "issuing_body_ar": {
+      "type": "string"
+    },
+    "description_en": {
+      "type": "text"
+    },
+    "description_ar": {
+      "type": "text"
+    },
+    "valid_until": {
+      "type": "date"
+    }
+  }
+}

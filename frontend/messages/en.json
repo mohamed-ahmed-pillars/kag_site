@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "export": "Export",
+    "quotation": "Quotation",
+    "blog": "Blog",
+    "contact": "Contact",
+    "certifications": "Certifications"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "home": {
+    "hero": {
+      "title": "Premium Food Products for Global Markets",
+      "subtitle": "Quality Egyptian food manufacturing and export since 1999",
+      "cta": "Request a Quote"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us"
+  }
+}

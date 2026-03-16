@@ -31,6 +31,12 @@
     "sort_order": {
       "type": "integer",
       "default": 0
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product",
+      "mappedBy": "category"
     }
   }
 }

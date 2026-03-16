@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rfq_submissions",
+  "info": {
+    "singularName": "rfq-submission",
+    "pluralName": "rfq-submissions",
+    "displayName": "RFQ Submission"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "company_name": {
+      "type": "string",
+      "required": true
+    },
+    "contact_name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "products": {
+      "type": "json"
+    },
+    "message": {
+      "type": "text"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["new", "reviewed", "responded"],
+      "default": "new"
+    },
+    "reference_number": {
+      "type": "string"
+    }
+  }
+}

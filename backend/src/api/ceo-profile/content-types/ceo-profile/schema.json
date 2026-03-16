@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "ceo_profiles",
+  "info": {
+    "singularName": "ceo-profile",
+    "pluralName": "ceo-profiles",
+    "displayName": "CEO Profile"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name_en": {
+      "type": "string",
+      "required": true
+    },
+    "name_ar": {
+      "type": "string",
+      "required": true
+    },
+    "title_en": {
+      "type": "string"
+    },
+    "title_ar": {
+      "type": "string"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "quote_en": {
+      "type": "text"
+    },
+    "quote_ar": {
+      "type": "text"
+    },
+    "bio_en": {
+      "type": "richtext"
+    },
+    "bio_ar": {
+      "type": "richtext"
+    }
+  }
+}

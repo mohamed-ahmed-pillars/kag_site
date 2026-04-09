@@ -11,7 +11,7 @@ import { FlowButton } from '@/components/ui/flow-button';
 const GLOBE_CONFIG: COBEOptions = {
   width: 800,
   height: 800,
-  devicePixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 2),
+  devicePixelRatio: 2,
   phi: 0,
   theta: 0.3,
   dark: 0,
@@ -80,6 +80,7 @@ function Globe({
 
     const globe = createGlobe(canvasRef.current!, {
       ...config,
+      devicePixelRatio: Math.min(window.devicePixelRatio, 2),
       width: width * 2,
       height: width * 2,
     });
@@ -103,9 +104,9 @@ function Globe({
     });
 
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(rafId);
       globe.destroy();
-      observer.disconnect();
       window.removeEventListener('resize', onResize);
     };
   }, []);

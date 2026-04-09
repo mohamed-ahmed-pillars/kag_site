@@ -1,0 +1,89 @@
+'use client';
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useTranslations, useLocale } from 'next-intl';
+import { Newspaper } from 'lucide-react';
+import { Container } from '@/components/ui';
+import { ExpandableCard } from '@/components/ui/expandable-card';
+import { posts } from '@/lib/data/posts';
+
+const categories = ['all', 'news', 'certifications', 'events'];
+
+export default function BlogPage() {
+  const t = useTranslations('blog');
+  const locale = useLocale();
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  const filteredPosts =
+    activeCategory === 'all' ? posts : posts.filter((p) => p.category === activeCategory);
+
+  return (
+    <section className="py-20 bg-white min-h-screen">
+      <Container>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex justify-center mb-4">
+            <div
+              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5]"
+              style={{
+                borderTop: '1px solid rgba(255,255,255,0.8)',
+                boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+              }}
+            >
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900">
+                <Newspaper className="w-4 h-4" />
+                {t('title')}
+              </span>
+            </div>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('title')}</h1>
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto">{t('subtitle')}</p>
+        </div>
+
+        {/* Category filter */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {categories.map((category) => (
+            <motion.button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className="px-5 py-2 rounded-full font-medium text-gray-700 text-sm transition-all"
+              style={
+                activeCategory === category
+                  ? { background: '#e0e0e0', boxShadow: 'inset 3px 3px 7px rgba(0,0,0,0.12), inset -3px -3px 7px rgba(255,255,255,0.9)' }
+                  : { background: '#f5f5f5', borderTop: '1px solid rgba(255,255,255,0.8)', boxShadow: '3px 3px 8px rgba(0,0,0,0.12), -3px -3px 8px rgba(255,255,255,0.9)' }
+              }
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {t(`categories.${category}`)}
+            </motion.button>
+          ))}
+        </div>
+
+        {/* ExpandableCard grid */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {filteredPosts.map((post) => {
+            const bodyItems = locale === 'ar' ? post.body_ar : post.body_en;
+            return (
+              <ExpandableCard
+                key={post.id}
+                title={locale === 'ar' ? post.title_ar : post.title_en}
+                src={post.image}
+                description={locale === 'ar' ? post.excerpt_ar : post.excerpt_en}
+                classNameExpanded="[&_h4]:text-black [&_h4]:font-semibold [&_h4]:text-lg"
+              >
+                {bodyItems.map((item, i) => (
+                  <React.Fragment key={i}>
+                    <h4>{item.heading}</h4>
+                    <p>{item.body}</p>
+                  </React.Fragment>
+                ))}
+              </ExpandableCard>
+            );
+          })}
+        </div>
+      </Container>
+    </section>
+  );
+}

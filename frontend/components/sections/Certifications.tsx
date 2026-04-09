@@ -62,8 +62,8 @@ function IsoIllustration({ isInView }: { isInView: boolean }) {
       {/* Outer rotating dashes */}
       <motion.div
         className="absolute w-32 h-32 rounded-full"
-        animate={isInView ? { rotate: 360 } : {}}
-        transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+        animate={{ rotate: isInView ? 360 : 0 }}
+        transition={{ duration: 18, repeat: isInView ? Infinity : 0, ease: 'linear' }}
       >
         {segments.map((i) => (
           <div
@@ -130,7 +130,7 @@ function IsoIllustration({ isInView }: { isInView: boolean }) {
 }
 
 /** HACCP — 7 nodes in a triangle flow (hazard → analysis → control) */
-function HaccpIllustration({ isInView: _isInView }: { isInView: boolean }) {
+function HaccpIllustration() {
   const nodes = [
     { x: 50, y: 22, label: 'H' },
     { x: 20, y: 52, label: 'A' },
@@ -206,8 +206,8 @@ function HalalIllustration({ isInView }: { isInView: boolean }) {
       <motion.div
         className="absolute w-28 h-28 rounded-full"
         style={{ border: '1.5px solid rgba(0,0,0,0.07)' }}
-        animate={isInView ? { scale: [1, 1.5], opacity: [0.5, 0] } : {}}
-        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }}
+        animate={{ scale: isInView ? [1, 1.5] : 1, opacity: isInView ? [0.5, 0] : 0.5 }}
+        transition={{ duration: 2.4, repeat: isInView ? Infinity : 0, ease: 'easeOut' }}
       />
 
       {/* Circle base */}
@@ -288,8 +288,8 @@ function FdaIllustration({ isInView }: { isInView: boolean }) {
           width: 56,
           background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.25), transparent)',
         }}
-        animate={isInView ? { y: [-13, 13, -13] } : {}}
-        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+        animate={{ y: isInView ? [-13, 13, -13] : 0 }}
+        transition={{ duration: 2, repeat: isInView ? Infinity : 0, ease: 'easeInOut', delay: 0.5 }}
       />
 
       <motion.div
@@ -365,8 +365,8 @@ function OrganicIllustration({ isInView }: { isInView: boolean }) {
             r="2.5"
             fill="#aaa"
             initial={{ opacity: 0, y: 4 }}
-            animate={isInView ? { opacity: [0, 0.7, 0], y: [4, -6, -14] } : {}}
-            transition={{ delay: 0.6 + i * 0.2, duration: 1.8, repeat: Infinity, ease: 'easeOut' }}
+            animate={{ opacity: isInView ? [0, 0.7, 0] : 0, y: isInView ? [4, -6, -14] : 4 }}
+            transition={{ delay: 0.6 + i * 0.2, duration: 1.8, repeat: isInView ? Infinity : 0, ease: 'easeOut' }}
           />
         ))}
       </motion.svg>
@@ -398,18 +398,18 @@ function CertBadge({ children }: { children: React.ReactNode }) {
   );
 }
 
-const illustrations = [
-  <IllustrationWithView key="iso">{(v) => <IsoIllustration isInView={v} />}</IllustrationWithView>,
-  <IllustrationWithView key="haccp">{(v) => <HaccpIllustration isInView={v} />}</IllustrationWithView>,
-  <IllustrationWithView key="halal">{(v) => <HalalIllustration isInView={v} />}</IllustrationWithView>,
-  <IllustrationWithView key="fda">{(v) => <FdaIllustration isInView={v} />}</IllustrationWithView>,
-  <IllustrationWithView key="organic">{(v) => <OrganicIllustration isInView={v} />}</IllustrationWithView>,
-];
-
 /* ─── Section ─── */
 export default function Certifications() {
   const t = useTranslations('home.certifications');
   const locale = useLocale();
+
+  const illustrations = [
+    <IllustrationWithView key="iso">{(v) => <IsoIllustration isInView={v} />}</IllustrationWithView>,
+    <IllustrationWithView key="haccp">{() => <HaccpIllustration />}</IllustrationWithView>,
+    <IllustrationWithView key="halal">{(v) => <HalalIllustration isInView={v} />}</IllustrationWithView>,
+    <IllustrationWithView key="fda">{(v) => <FdaIllustration isInView={v} />}</IllustrationWithView>,
+    <IllustrationWithView key="organic">{(v) => <OrganicIllustration isInView={v} />}</IllustrationWithView>,
+  ];
 
   return (
     <section className="py-16 px-4 max-w-6xl mx-auto">

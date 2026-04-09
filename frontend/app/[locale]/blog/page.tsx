@@ -22,7 +22,12 @@ export default function BlogPage() {
     <section className="py-20 bg-white min-h-screen">
       <Container>
         {/* Header */}
-        <div className="text-center mb-12">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="flex justify-center mb-4">
             <div
               className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5]"
@@ -33,13 +38,13 @@ export default function BlogPage() {
             >
               <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900">
                 <Newspaper className="w-4 h-4" />
-                {t('title')}
+                {t('badge')}
               </span>
             </div>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('title')}</h1>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">{t('subtitle')}</p>
-        </div>
+        </motion.div>
 
         {/* Category filter */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">

@@ -368,6 +368,7 @@
     }
   },
   "blog": {
+    "badge": "BLOG",
     "title": "News & Insights",
     "subtitle": "Stay updated with the latest from KAG",
     "featured": "Featured",

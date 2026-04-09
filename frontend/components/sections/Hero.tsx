@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import { ArrowRight, ArrowDown } from 'lucide-react';
@@ -10,6 +11,26 @@ export default function Hero() {
   const t = useTranslations('home.hero');
   const locale = useLocale();
   const isRTL = locale === 'ar';
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   // Font classes based on locale
   const headingFont = isRTL ? 'font-sahel' : 'font-poppins';
@@ -22,12 +43,11 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#ffffff]">
+    <section ref={sectionRef} className="relative h-screen w-full overflow-hidden bg-[#ffffff]">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 z-10" style={{ backgroundColor: 'rgba(254,254,254,0.65)' }} />
-        <div className="absolute bottom-0 left-0 right-0 z-20" style={{ height: '180px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.6) 40%, rgba(255,255,255,1) 100%)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', maskImage: 'linear-gradient(to bottom, transparent, black)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black)' }} />
         <video
+          ref={videoRef}
           src="https://framerusercontent.com/assets/aMPvRVYHFQxBoB0v2qyJln83jI.mp4"
           autoPlay
           muted
@@ -43,10 +63,16 @@ export default function Hero() {
             objectFit: 'cover',
             backgroundColor: 'rgba(255, 255, 255, 1)',
             objectPosition: '50% 50%',
-            filter: 'invert(1) grayscale(1) brightness(1)',
             transform: 'scale(1.25) translateY(-8%)',
           }}
         />
+        {/* Invert: difference blend with white ≡ filter:invert(1) — composited once per frame on GPU, not in filter pipeline */}
+        <div className="absolute inset-0" style={{ backgroundColor: 'white', mixBlendMode: 'difference', zIndex: 1 }} />
+        {/* Desaturate: color blend with white ≡ filter:grayscale(1) */}
+        <div className="absolute inset-0" style={{ backgroundColor: 'white', mixBlendMode: 'color', zIndex: 2 }} />
+        {/* Lightening overlay */}
+        <div className="absolute inset-0 z-10" style={{ backgroundColor: 'rgba(254,254,254,0.65)' }} />
+        <div className="absolute bottom-0 left-0 right-0 z-20" style={{ height: '180px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.6) 40%, rgba(255,255,255,1) 100%)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', maskImage: 'linear-gradient(to bottom, transparent, black)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black)' }} />
       </div>
 
       {/* Centered Logo + Tags */}

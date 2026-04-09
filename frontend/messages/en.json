@@ -8,7 +8,25 @@
     "quotation": "Quotation",
     "blog": "Blog",
     "contact": "Contact",
-    "certifications": "Certifications"
+    "certifications": "Certifications",
+    "allProducts": "All Products",
+    "privateLabel": "Private Label",
+    "company": "Company",
+    "ourProducts": "Our Products",
+    "ourBrands": "Our Brands",
+    "ourBrandsDesc": "Premium KAG food products",
+    "privateLabelDesc": "Custom manufacturing solutions",
+    "aboutKag": "About KAG",
+    "aboutUs": "About Us",
+    "aboutUsDesc": "Our story and mission",
+    "exportServices": "Export Services",
+    "exportServicesDesc": "Global distribution network",
+    "certificationsDesc": "Quality standards & compliance",
+    "resources": "Resources",
+    "contactUs": "Contact Us",
+    "requestQuote": "Request Quote",
+    "viewAllProducts": "View All Products",
+    "language": "Language"
   },
   "common": {
     "learnMore": "Learn More",
@@ -71,6 +89,24 @@
       "submit": "Subscribe",
       "success": "Thank you for subscribing!",
       "privacy": "We respect your privacy. Unsubscribe at any time."
+    },
+    "quote": "*KAG* *has* *been* *a* trusted *leader* *in* food *manufacturing* *and* export *for* *over* 25 *years,* *delivering* premium *products* *to* *more* *than* 30 *countries* *with* 500 *satisfied* clients *worldwide.*",
+    "benefits": {
+      "badge": "BENEFITS",
+      "title": "Why Choose Us",
+      "subtitle": "From farm to shelf, we uphold the highest standards in quality, safety, and reliability — trusted by clients across the globe.",
+      "quality": {
+        "title": "Premium Quality",
+        "description": "Every product meets the highest international food safety and quality standards."
+      },
+      "export": {
+        "title": "Global Export",
+        "description": "Delivering to 30+ countries with a reliable and efficient distribution network."
+      },
+      "partner": {
+        "title": "Trusted Partner",
+        "description": "500+ satisfied clients worldwide built on trust, consistency, and excellence."
+      }
     },
     "whatWeOffer": {
       "title": "What We Offer",
@@ -183,7 +219,7 @@
     },
     "ceo": {
       "quote": "Our mission has always been to bring the finest Egyptian food products to the world, while maintaining the highest standards of quality and sustainability.",
-      "name": "Ahmed Hassan",
+      "name": "Khalid Abdelhamid",
       "title": "Founder & CEO"
     },
     "missionVision": {

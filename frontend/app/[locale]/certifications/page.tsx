@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import { Shield, CheckCircle, X, Calendar, Building2 } from 'lucide-react';
-import { Container } from '@/components/ui';
 import { FeatureCard } from '@/components/ui/feature-card';
 
 const certifications = [
@@ -223,7 +222,7 @@ export default function CertificationsPage() {
   return (
     <>
       {/* Header */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
+      <section className="py-20 bg-white min-h-screen px-4 max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
             <div

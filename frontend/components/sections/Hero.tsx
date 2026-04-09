@@ -43,10 +43,10 @@ export default function Hero() {
             objectFit: 'cover',
             backgroundColor: 'rgba(255, 255, 255, 1)',
             objectPosition: '50% 50%',
+            filter: 'invert(1) grayscale(1) brightness(1)',
             transform: 'scale(1.25) translateY(-8%)',
           }}
         />
-        <div className="absolute inset-0" style={{ mixBlendMode: 'color', backgroundColor: 'white', zIndex: 1 }} />
       </div>
 
       {/* Centered Logo + Tags */}

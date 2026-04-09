@@ -76,7 +76,7 @@ export const posts = [
     title_ar: 'مبادرتنا الجديدة للتعبئة الغذائية المستدامة',
     excerpt_en: 'News',
     excerpt_ar: 'أخبار',
-    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&h=600&fit=crop',
     body_en: [
       { heading: 'Reimagining Food Packaging', body: 'At KAG, how we package our food products is just as important as what goes inside them. Starting Q2 2026, we are rolling out a new generation of food-grade sustainable packaging across our entire range — from olive oils and tomato pastes to pickles and tahini.' },
       { heading: 'Food-Safe, Planet-Friendly Materials', body: 'Our new packaging uses BPA-free, food-grade recyclable materials that preserve freshness and flavour while reducing plastic waste. Hermetic tin cans now feature thinner, recyclable steel walls without compromising shelf life, and our bottle closures switch to food-safe bio-based caps that seal in quality and lock out contaminants.' },

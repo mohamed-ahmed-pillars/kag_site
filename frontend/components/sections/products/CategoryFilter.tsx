@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { Droplets, Soup, Salad } from 'lucide-react';
 
 const categories = [
@@ -17,7 +17,6 @@ interface CategoryFilterProps {
 }
 
 export default function CategoryFilter({ activeCategory, onCategoryChange }: CategoryFilterProps) {
-  const t = useTranslations('products');
   const locale = useLocale();
 
   return (

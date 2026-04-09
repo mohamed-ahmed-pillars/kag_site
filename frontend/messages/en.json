@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About",
     "products": "Products",
+    "services": "Services",
     "export": "Export",
     "quotation": "Quotation",
     "blog": "Blog",
@@ -18,9 +19,419 @@
   },
   "home": {
     "hero": {
-      "title": "Premium Food Products for Global Markets",
-      "subtitle": "Quality Egyptian food manufacturing and export since 1999",
-      "cta": "Request a Quote"
+      "tag1": "Quality",
+      "tag2": "Innovation",
+      "tag3": "Growth",
+      "description": "At KAG, our mission is to produce and deliver high-quality food products that bring freshness, nutrition, and trust to every household.",
+      "ctaLink": "Start working with us",
+      "headline1": "Redefining",
+      "headline2": "food exports at",
+      "headline3": "a global scale.",
+      "coordinates": "30.0444° N, 31.2357° E",
+      "scrollCta": "Discover more"
+    },
+    "stats": {
+      "products": "Products",
+      "countries": "Countries Served",
+      "clients": "Happy Clients",
+      "years": "Years of Excellence"
+    },
+    "products": {
+      "title": "Our Products",
+      "subtitle": "Discover our range of premium quality food products, manufactured with the finest ingredients and exported worldwide.",
+      "viewProduct": "View Details",
+      "viewAll": "View All Products"
+    },
+    "certifications": {
+      "title": "Our Certifications",
+      "subtitle": "We maintain the highest international standards in food safety and quality.",
+      "verified": "Verified"
+    },
+    "globalReach": {
+      "badge": "Global Reach",
+      "title": "Delivering to 30+ Countries Worldwide",
+      "subtitle": "We export our products to over 30 countries across 5 continents, building lasting partnerships with trusted distributors around the globe.",
+      "mapPlaceholder": "Interactive map coming soon",
+      "countries": "Countries",
+      "continents": "Continents",
+      "clients": "Clients",
+      "exportDestinations": "Export Destinations",
+      "learnMore": "Learn More About Export"
+    },
+    "news": {
+      "title": "Latest News",
+      "subtitle": "Stay updated with our latest announcements, events, and industry insights.",
+      "readMore": "Read More",
+      "viewAll": "View All News"
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "subtitle": "Subscribe to our newsletter to receive the latest news, product updates, and industry insights.",
+      "placeholder": "Enter your email",
+      "submit": "Subscribe",
+      "success": "Thank you for subscribing!",
+      "privacy": "We respect your privacy. Unsubscribe at any time."
+    },
+    "whatWeOffer": {
+      "title": "What We Offer",
+      "subtitle": "Delivering high-quality food products through scalable manufacturing, efficient distribution, and global trade expertise.",
+      "services": {
+        "manufacturing": {
+          "title": "Bulk Food Manufacturing",
+          "description": "Production of tomato sauces, juices, jams, and processed foods with consistent quality tailored for large-scale supply."
+        },
+        "importExport": {
+          "title": "Import & Export Services",
+          "description": "End-to-end trade operations enabling seamless movement of goods across international markets."
+        },
+        "privateLabel": {
+          "title": "Private Label & Customization",
+          "description": "Flexible production solutions to support private labeling and customized product requirements for partners."
+        },
+        "quality": {
+          "title": "Quality Assurance & Compliance",
+          "description": "Strict adherence to international food safety and quality standards to meet global market requirements."
+        }
+      },
+      "strength": {
+        "title": "Operational Strength",
+        "items": {
+          "facilities": "High-capacity production facilities",
+          "supplyChain": "Reliable global supply chain network",
+          "partnerships": "Long-term partnerships with distributors and retailers",
+          "innovation": "Continuous product innovation and development"
+        }
+      }
+    }
+  },
+  "products": {
+    "badge": "Our Products",
+    "title": "Our Products",
+    "subtitle": "Discover our complete range of premium quality Egyptian food products",
+    "featured": "Featured",
+    "viewDetails": "View Details",
+    "categories": {
+      "oils": "Oils",
+      "sauces": "Sauces",
+      "pickles": "Pickles"
+    },
+    "detail": {
+      "breadcrumb": {
+        "home": "Home",
+        "products": "Products"
+      },
+      "categories": {
+        "oils": "Oils",
+        "sauces": "Sauces",
+        "pickles": "Pickles"
+      },
+      "quickSpecs": "Quick Specifications",
+      "specs": {
+        "origin": "Origin",
+        "shelfLife": "Shelf Life",
+        "storage": "Storage",
+        "sizes": "Available Sizes"
+      },
+      "requestQuote": "Request Quote",
+      "downloadSpec": "Download Specs",
+      "packaging": {
+        "title": "Packaging Options"
+      },
+      "features": {
+        "title": "Product Features",
+        "item1": "Premium quality ingredients sourced locally",
+        "item2": "Manufactured under strict quality control",
+        "item3": "ISO 22000 & HACCP certified production",
+        "item4": "Suitable for international export",
+        "item5": "Private label options available",
+        "item6": "Customizable packaging solutions"
+      },
+      "related": "Related Products",
+      "viewAll": "View All Products"
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "About Us - KAG Food Manufacturing",
+      "description": "Learn about KAG's 25+ years of excellence in food manufacturing and export."
+    },
+    "story": {
+      "badge": "Our Story",
+      "title": "25 Years of Excellence in Food Manufacturing",
+      "paragraph1": "Founded in 1999, KAG has grown from a small family business into one of Egypt's leading food manufacturing and export companies. Our journey has been defined by an unwavering commitment to quality and innovation.",
+      "paragraph2": "Today, we operate state-of-the-art facilities equipped with the latest technology, allowing us to produce premium food products that meet the highest international standards.",
+      "imagePlaceholder": "Company headquarters",
+      "yearsLabel": "Years of Excellence",
+      "highlights": {
+        "founded": {
+          "value": "1999",
+          "label": "Founded"
+        },
+        "certifications": {
+          "value": "5+",
+          "label": "Certifications"
+        },
+        "employees": {
+          "value": "200+",
+          "label": "Employees"
+        },
+        "growth": {
+          "value": "40%",
+          "label": "YoY Growth"
+        }
+      }
+    },
+    "ceo": {
+      "quote": "Our mission has always been to bring the finest Egyptian food products to the world, while maintaining the highest standards of quality and sustainability.",
+      "name": "Ahmed Hassan",
+      "title": "Founder & CEO"
+    },
+    "missionVision": {
+      "badge": "What Drives Us",
+      "title": "Our Mission, Vision & Values",
+      "mission": {
+        "title": "Our Mission",
+        "description": "To manufacture and export premium quality food products that exceed customer expectations while maintaining sustainable practices and contributing to the growth of Egypt's food industry."
+      },
+      "vision": {
+        "title": "Our Vision",
+        "description": "To become the leading Egyptian food manufacturer recognized globally for quality, innovation, and sustainability, delivering authentic Egyptian flavors to every corner of the world."
+      },
+      "values": {
+        "title": "Our Values",
+        "description": "Quality, integrity, innovation, and customer satisfaction are at the core of everything we do. We believe in building lasting relationships based on trust and mutual respect."
+      }
+    },
+    "timeline": {
+      "title": "Our Journey",
+      "subtitle": "From humble beginnings to international recognition",
+      "milestones": {
+        "founded": {
+          "title": "Company Founded",
+          "description": "KAG was established as a small family-owned business focused on producing traditional Egyptian food products."
+        },
+        "expansion": {
+          "title": "First Expansion",
+          "description": "Opened our first large-scale production facility, increasing capacity and product range significantly."
+        },
+        "certification": {
+          "title": "International Certifications",
+          "description": "Achieved ISO 22000 and HACCP certifications, marking our commitment to international quality standards."
+        },
+        "international": {
+          "title": "Global Expansion",
+          "description": "Began exporting to international markets, reaching customers in over 15 countries across 3 continents."
+        },
+        "modernization": {
+          "title": "Technology Upgrade",
+          "description": "Invested in state-of-the-art manufacturing equipment and automated quality control systems."
+        },
+        "sustainability": {
+          "title": "Sustainability Initiative",
+          "description": "Launched comprehensive sustainability program with focus on renewable energy and waste reduction."
+        }
+      }
+    },
+    "facilities": {
+      "title": "Our Facilities",
+      "subtitle": "State-of-the-art manufacturing and quality control",
+      "items": {
+        "production": {
+          "title": "Production Lines",
+          "description": "Modern automated production facilities"
+        },
+        "laboratory": {
+          "title": "Quality Lab",
+          "description": "ISO-certified testing laboratory"
+        },
+        "packaging": {
+          "title": "Packaging Center",
+          "description": "Automated packaging solutions"
+        },
+        "warehouse": {
+          "title": "Storage Facilities",
+          "description": "Climate-controlled warehouses"
+        },
+        "logistics": {
+          "title": "Logistics Hub",
+          "description": "Efficient distribution network"
+        },
+        "team": {
+          "title": "Our Team",
+          "description": "Skilled professionals and experts"
+        }
+      }
+    }
+  },
+  "export": {
+    "hero": {
+      "badge": "Global Export",
+      "title": "Delivering Egyptian Excellence Worldwide",
+      "subtitle": "We export premium food products to over 30 countries, ensuring quality and freshness at every destination.",
+      "cta": "Request Quote",
+      "contact": "Contact Us",
+      "countries": "Countries",
+      "continents": "Continents"
+    },
+    "process": {
+      "title": "Our Export Process",
+      "subtitle": "A seamless journey from inquiry to delivery",
+      "steps": {
+        "inquiry": {
+          "title": "Inquiry",
+          "description": "Submit your requirements"
+        },
+        "samples": {
+          "title": "Samples",
+          "description": "Receive product samples"
+        },
+        "quality": {
+          "title": "Quality Check",
+          "description": "Rigorous testing"
+        },
+        "shipping": {
+          "title": "Shipping",
+          "description": "Secure packaging & transport"
+        },
+        "delivery": {
+          "title": "Delivery",
+          "description": "On-time arrival"
+        }
+      }
+    },
+    "destinations": {
+      "title": "Export Destinations",
+      "subtitle": "We reach customers across the globe",
+      "regions": {
+        "middleEast": "Middle East",
+        "europe": "Europe",
+        "africa": "Africa",
+        "americas": "Americas",
+        "asia": "Asia Pacific"
+      }
+    },
+    "packaging": {
+      "title": "Packaging Solutions",
+      "subtitle": "Flexible options for every need",
+      "options": {
+        "retail": {
+          "title": "Retail Packaging",
+          "description": "Consumer-ready packaging for supermarkets and stores"
+        },
+        "foodservice": {
+          "title": "Food Service",
+          "description": "Bulk packaging for restaurants and catering"
+        },
+        "bulk": {
+          "title": "Bulk & Industrial",
+          "description": "Large-scale packaging for B2B customers"
+        }
+      }
+    },
+    "privateLabel": {
+      "title": "Private Label Services",
+      "subtitle": "Launch your own brand with our expertise",
+      "features": {
+        "item1": "Custom formulations and recipes",
+        "item2": "Flexible MOQ for startups",
+        "item3": "Full design and branding support",
+        "item4": "Regulatory compliance assistance"
+      },
+      "cta": "Start Your Brand"
+    }
+  },
+  "certifications": {
+    "hero": {
+      "badge": "Quality Assured",
+      "title": "Our Certifications",
+      "subtitle": "We maintain the highest international standards to ensure quality, safety, and compliance across all our products."
+    },
+    "validUntil": "Valid Until",
+    "verified": "Verified",
+    "why": {
+      "title": "Why Certifications Matter",
+      "subtitle": "Our certifications ensure the highest standards",
+      "reasons": {
+        "item1": {
+          "title": "Quality Assurance",
+          "description": "Certifications guarantee consistent quality in every product we manufacture."
+        },
+        "item2": {
+          "title": "Food Safety",
+          "description": "Rigorous standards ensure our products are safe for consumption worldwide."
+        },
+        "item3": {
+          "title": "Market Access",
+          "description": "International certifications enable export to markets with strict requirements."
+        }
+      }
+    }
+  },
+  "blog": {
+    "title": "News & Insights",
+    "subtitle": "Stay updated with the latest from KAG",
+    "featured": "Featured",
+    "readMore": "Read More",
+    "categories": {
+      "all": "All Posts",
+      "news": "Company News",
+      "certifications": "Certifications",
+      "events": "Events"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "blog": "Blog"
+    },
+    "share": "Share",
+    "backToBlog": "Back to Blog",
+    "relatedPosts": "Related Posts"
+  },
+  "contact": {
+    "hero": {
+      "badge": "Get in Touch",
+      "title": "Contact Us",
+      "subtitle": "Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible."
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": {
+        "title": "Address",
+        "value": "Industrial Zone, 10th of Ramadan City, Egypt"
+      },
+      "phone": {
+        "title": "Phone",
+        "value": "+20 123 456 7890"
+      },
+      "email": {
+        "title": "Email",
+        "value": "info@kag-egypt.com"
+      },
+      "hours": {
+        "title": "Working Hours",
+        "value": "Sun - Thu: 8:00 AM - 5:00 PM"
+      },
+      "social": "Follow Us"
+    },
+    "form": {
+      "title": "Send us a Message",
+      "name": "Full Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter your phone",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this about?",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you! Your message has been sent successfully."
+    },
+    "map": {
+      "title": "Find Us",
+      "subtitle": "Visit our headquarters",
+      "placeholder": "Interactive map will be displayed here"
     }
   },
   "footer": {
@@ -28,5 +439,75 @@
     "quickLinks": "Quick Links",
     "contactUs": "Contact Us",
     "followUs": "Follow Us"
+  },
+  "quotation": {
+    "hero": {
+      "badge": "Request for Quote",
+      "title": "Get a Custom Quote",
+      "subtitle": "Fill out the form below to request a personalized quote for your bulk order. Our team will respond within 24-48 hours."
+    },
+    "steps": {
+      "company": "Company Info",
+      "products": "Products",
+      "shipping": "Shipping",
+      "review": "Review"
+    },
+    "form": {
+      "companyInfo": {
+        "title": "Company Information",
+        "companyName": "Company Name",
+        "companyNamePlaceholder": "Enter your company name",
+        "contactName": "Contact Person",
+        "contactNamePlaceholder": "Enter contact person name",
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your business email",
+        "phone": "Phone Number",
+        "phonePlaceholder": "Enter phone with country code",
+        "country": "Country",
+        "countryPlaceholder": "Enter your country",
+        "address": "Address",
+        "addressPlaceholder": "Enter your business address"
+      },
+      "products": {
+        "title": "Product Selection",
+        "product": "Product",
+        "selectProduct": "Select Product",
+        "selectProductPlaceholder": "Choose a product",
+        "quantity": "Quantity",
+        "quantityPlaceholder": "e.g., 500 units, 10 pallets",
+        "packaging": "Packaging Preference",
+        "packagingPlaceholder": "Select packaging type",
+        "packagingOptions": {
+          "retail": "Retail Packaging",
+          "foodservice": "Food Service",
+          "bulk": "Bulk / Industrial"
+        },
+        "notes": "Special Notes",
+        "notesPlaceholder": "Any specific requirements",
+        "addProduct": "Add Another Product"
+      },
+      "shipping": {
+        "title": "Shipping Details",
+        "method": "Shipping Method (Incoterm)",
+        "destination": "Destination Port/City",
+        "destinationPlaceholder": "e.g., Rotterdam, Dubai",
+        "estimatedDate": "Preferred Delivery Date",
+        "specialRequirements": "Special Requirements",
+        "specialRequirementsPlaceholder": "Temperature requirements, documentation needs, etc."
+      },
+      "review": {
+        "title": "Review Your Request"
+      },
+      "prev": "Previous",
+      "next": "Next",
+      "submit": "Submit Request",
+      "submitting": "Submitting..."
+    },
+    "success": {
+      "title": "Quote Request Submitted!",
+      "message": "Thank you for your inquiry. Our export team will review your request and get back to you within 24-48 business hours.",
+      "reference": "Reference Number",
+      "backHome": "Back to Home"
+    }
   }
 }

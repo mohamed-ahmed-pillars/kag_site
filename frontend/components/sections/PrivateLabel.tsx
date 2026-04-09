@@ -49,7 +49,7 @@ function BrandIllustration({ isInView }: { isInView: boolean }) {
         className="absolute"
         style={{ top: '50%', marginTop: -18, right: 'calc(50% - 35px)' }}
         initial={{ rotateY: 0 }}
-        animate={{ rotateY: isInView ? [0, 40, 0] : 0 }}
+        animate={{ rotateY: [0, 40, 0] }}
         transition={{ delay: 1, duration: 1.5, repeat: isInView ? Infinity : 0, repeatDelay: 2, ease: 'easeInOut' }}
       >
         <div style={{ width: 10, height: 36, background: 'linear-gradient(90deg,#555,#333)', borderRadius: '0 4px 4px 0', opacity: 0.6 }} />
@@ -109,7 +109,7 @@ function ManufacturingIllustration({ isInView }: { isInView: boolean }) {
             background: '#bbb',
             top: 'calc(50% + 11px)',
           }}
-          animate={{ x: isInView ? [i * 32 - 48, i * 32 + 32 - 48] : i * 32 - 48 }}
+          animate={{ x: [i * 32 - 48, i * 32 + 32 - 48] }}
           transition={{ duration: 1.2, repeat: isInView ? Infinity : 0, ease: 'linear', delay: i * 0.3 }}
         />
       ))}
@@ -124,7 +124,7 @@ function ManufacturingIllustration({ isInView }: { isInView: boolean }) {
             boxShadow: '3px 3px 6px rgba(0,0,0,0.1), -2px -2px 4px rgba(255,255,255,0.9)',
             top: 'calc(50% - 4px)',
           }}
-          animate={{ x: isInView ? [-60 + i * 44, 80 + i * 44] : -60 + i * 44 }}
+          animate={{ x: [-60 + i * 44, 80 + i * 44] }}
           transition={{ duration: 2.5, repeat: isInView ? Infinity : 0, ease: 'linear', delay: i * 0.83 }}
         >
           <span style={{ fontSize: 8, fontWeight: 700, color: '#888' }}>■</span>
@@ -144,7 +144,7 @@ function ManufacturingIllustration({ isInView }: { isInView: boolean }) {
             key={i}
             className="absolute rounded-full"
             style={{ width: 8, height: 8, background: '#ddd', top: -14 - i * 8, left: i * 6 }}
-            animate={{ opacity: isInView ? [0, 0.6, 0] : 0, y: isInView ? [0, -10, -20] : 0, scale: isInView ? [0.5, 1, 1.4] : 0.5 }}
+            animate={{ opacity: [0, 0.6, 0], y: [0, -10, -20], scale: [0.5, 1, 1.4] }}
             transition={{ duration: 1.8, repeat: isInView ? Infinity : 0, delay: i * 0.6, ease: 'easeOut' }}
           />
         ))}
@@ -201,7 +201,7 @@ function MoqIllustration({ isInView }: { isInView: boolean }) {
       <motion.div
         className="absolute flex items-center gap-1"
         style={{ bottom: 36, left: '50%', transform: 'translateX(-50%)' }}
-        animate={{ scaleX: isInView ? [1, 1.15, 1] : 1 }}
+        animate={{ scaleX: [1, 1.15, 1] }}
         transition={{ duration: 1.6, repeat: isInView ? Infinity : 0, ease: 'easeInOut', delay: 0.5 }}
       >
         <svg width="48" height="14" viewBox="0 0 48 14">
@@ -232,7 +232,7 @@ function QualityIllustration({ isInView }: { isInView: boolean }) {
           key={i}
           className="absolute rounded-full"
           style={{ border: '1.5px solid rgba(0,0,0,0.07)', width: 100 + i * 24, height: 100 + i * 24 }}
-          animate={{ scale: isInView ? [1, 1.12, 1] : 1, opacity: isInView ? [0.6, 0, 0.6] : 0.6 }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.6, 0, 0.6] }}
           transition={{ duration: 2.2, repeat: isInView ? Infinity : 0, ease: 'easeInOut', delay: i * 0.5 }}
         />
       ))}

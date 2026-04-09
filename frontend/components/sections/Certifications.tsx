@@ -206,7 +206,7 @@ function HalalIllustration({ isInView }: { isInView: boolean }) {
       <motion.div
         className="absolute w-28 h-28 rounded-full"
         style={{ border: '1.5px solid rgba(0,0,0,0.07)' }}
-        animate={{ scale: isInView ? [1, 1.5] : 1, opacity: isInView ? [0.5, 0] : 0.5 }}
+        animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
         transition={{ duration: 2.4, repeat: isInView ? Infinity : 0, ease: 'easeOut' }}
       />
 
@@ -288,7 +288,7 @@ function FdaIllustration({ isInView }: { isInView: boolean }) {
           width: 56,
           background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.25), transparent)',
         }}
-        animate={{ y: isInView ? [-13, 13, -13] : 0 }}
+        animate={{ y: [-13, 13, -13] }}
         transition={{ duration: 2, repeat: isInView ? Infinity : 0, ease: 'easeInOut', delay: 0.5 }}
       />
 
@@ -365,7 +365,7 @@ function OrganicIllustration({ isInView }: { isInView: boolean }) {
             r="2.5"
             fill="#aaa"
             initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: isInView ? [0, 0.7, 0] : 0, y: isInView ? [4, -6, -14] : 4 }}
+            animate={{ opacity: [0, 0.7, 0], y: [4, -6, -14] }}
             transition={{ delay: 0.6 + i * 0.2, duration: 1.8, repeat: isInView ? Infinity : 0, ease: 'easeOut' }}
           />
         ))}

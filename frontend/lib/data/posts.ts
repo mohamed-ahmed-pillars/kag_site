@@ -76,7 +76,7 @@ export const posts = [
     title_ar: 'مبادرتنا الجديدة للتعبئة المستدامة',
     excerpt_en: 'News',
     excerpt_ar: 'أخبار',
-    image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop',
     body_en: [
       { heading: 'Going Green', body: 'As part of our commitment to environmental sustainability, KAG is proud to announce our new sustainable packaging initiative. Starting Q2 2026, we transition to eco-friendly packaging materials across all product lines.' },
       { heading: 'Key Changes', body: 'Recyclable PET bottles replace traditional plastics, FSC-certified cardboard covers all outer packaging, and biodegradable labels reduce our environmental impact by an estimated 30% over three years.' },

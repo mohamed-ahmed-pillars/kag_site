@@ -11,6 +11,7 @@ import { useScroll } from '@/components/ui/use-scroll';
 import MegaMenu, { type MegaMenuItem } from '@/components/ui/mega-menu';
 import { FlowButton } from '@/components/ui/flow-button';
 import { LanguageSelectorDropdown } from '@/components/ui/language-selector-dropdown';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import {
     Package,
     Factory,
@@ -134,9 +135,9 @@ export function Header() {
     return (
         <header
             style={{
-                backgroundColor: '#f5f5f50D',
+                backgroundColor: 'var(--color-nav-bg)',
             }}
-            className="sticky top-0 z-50 w-full text-[#09090b]"
+            className="sticky top-0 z-50 w-full"
         >
             <div
                 aria-hidden="true"
@@ -154,7 +155,7 @@ export function Header() {
             />
             <nav
                 className={cn(
-                    'relative flex h-14 w-full items-center justify-between px-10 md:h-16 md:px-16 max-w-screen-2xl mx-auto md:transition-all md:ease-out',
+                    'relative flex h-14 w-full items-center justify-between px-4 sm:px-6 md:h-16 md:px-10 lg:px-16 max-w-screen-2xl mx-auto md:transition-all md:ease-out',
                     {
                         'md:px-6': scrolled,
                     },
@@ -178,6 +179,7 @@ export function Header() {
                     <MegaMenu items={NAV_ITEMS} />
                 </div>
                 <div className="hidden md:flex items-center gap-3">
+                    <ThemeToggle />
                     <Link href={getLocalizedHref('/contact')}>
                         <FlowButton text={t('contactUs')} variant="solid" />
                     </Link>
@@ -189,11 +191,11 @@ export function Header() {
 
             <div
                 className={cn(
-                    'sticky top-14 left-0 w-full z-50 flex flex-col overflow-hidden md:hidden text-[#09090b] shadow-lg',
+                    'sticky top-14 left-0 w-full z-50 flex flex-col overflow-hidden md:hidden shadow-lg',
                     open ? 'block' : 'hidden',
                 )}
                 style={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: 'var(--color-nav-mobile-bg)',
                 }}
             >
                 <div
@@ -221,7 +223,10 @@ export function Header() {
                     <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
                         <div className="flex items-center justify-between">
                             <span className="text-sm text-gray-500">{t('language')}</span>
-                            <LanguageSelectorDropdown />
+                            <div className="flex items-center gap-3">
+                                <ThemeToggle />
+                                <LanguageSelectorDropdown />
+                            </div>
                         </div>
                         <Link href={getLocalizedHref('/quotation')} onClick={() => setOpen(false)}>
                             <FlowButton text={t('requestQuote')} className="w-full" />

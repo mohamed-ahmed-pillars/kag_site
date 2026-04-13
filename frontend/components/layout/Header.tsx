@@ -11,7 +11,7 @@ import { useScroll } from '@/components/ui/use-scroll';
 import MegaMenu, { type MegaMenuItem } from '@/components/ui/mega-menu';
 import { FlowButton } from '@/components/ui/flow-button';
 import { LanguageSelectorDropdown } from '@/components/ui/language-selector-dropdown';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import {
     Package,
     Factory,
@@ -147,7 +147,7 @@ export function Header() {
                     height: '200%',
                     backdropFilter: 'blur(4px)',
                     WebkitBackdropFilter: 'blur(4px)',
-                    background: 'linear-gradient(to bottom, #f5f5f51A, transparent 50%)',
+                    background: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-nav-mobile-bg) 10%, transparent), transparent 50%)',
                     pointerEvents: 'none',
                     WebkitMaskImage: 'linear-gradient(to bottom, black 0% 50%, transparent 50% 100%)',
                     maskImage: 'linear-gradient(to bottom, black 0% 50%, transparent 50% 100%)',
@@ -171,7 +171,7 @@ export function Header() {
                         alt="KAG Logo"
                         width={120}
                         height={40}
-                        className="h-30 w-auto brightness-0"
+                        className="h-30 w-auto brightness-0 dark:invert"
                         priority
                     />
                 </Link>
@@ -184,7 +184,7 @@ export function Header() {
                         <FlowButton text={t('contactUs')} variant="solid" />
                     </Link>
                 </div>
-                <Button size="icon" variant="outline" onClick={() => setOpen(!open)} className="md:hidden border-gray-200">
+                <Button size="icon" variant="outline" onClick={() => setOpen(!open)} className="md:hidden border-gray-200 dark:border-gray-700">
                     <MenuToggleIcon open={open} className="size-5" duration={300} />
                 </Button>
             </nav>
@@ -220,9 +220,9 @@ export function Header() {
                             </Link>
                         ))}
                     </div>
-                    <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
+                    <div className="flex flex-col gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
                         <div className="flex items-center justify-between">
-                            <span className="text-sm text-gray-500">{t('language')}</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">{t('language')}</span>
                             <div className="flex items-center gap-3">
                                 <ThemeToggle />
                                 <LanguageSelectorDropdown />

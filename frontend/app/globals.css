@@ -1,54 +1,358 @@
 @import "tailwindcss";
 
-@theme {
-  /* Primary Colors (Blue) */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #1e40af;
-  --color-primary-700: #1d4ed8;
-  --color-primary-800: #1e3a8a;
-  --color-primary-900: #1e3a8a;
-  --color-primary-950: #172554;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  /* Secondary Colors (Green) */
-  --color-secondary-50: #ecfdf5;
-  --color-secondary-100: #d1fae5;
-  --color-secondary-200: #a7f3d0;
-  --color-secondary-300: #6ee7b7;
-  --color-secondary-400: #34d399;
-  --color-secondary-500: #10b981;
-  --color-secondary-600: #059669;
-  --color-secondary-700: #047857;
-  --color-secondary-800: #065f46;
-  --color-secondary-900: #064e3b;
-  --color-secondary-950: #022c22;
-
-  /* Accent Colors (Amber) */
-  --color-accent-50: #fffbeb;
-  --color-accent-100: #fef3c7;
-  --color-accent-200: #fde68a;
-  --color-accent-300: #fcd34d;
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
-  --color-accent-700: #b45309;
-  --color-accent-800: #92400e;
-  --color-accent-900: #78350f;
-  --color-accent-950: #451a03;
-
-  /* Font Families */
-  --font-family-inter: var(--font-inter), system-ui, sans-serif;
-  --font-family-noto-arabic: var(--font-noto-arabic), system-ui, sans-serif;
+:root {
+  --color-bg: #ffffff;
+  --color-text: #09090b;
+  --color-nav-bg: #f5f5f51A;
+  --color-nav-mobile-bg: #f5f5f5;
+  --color-nav-text: #09090b;
 }
 
-.font-inter {
-  font-family: var(--font-inter), system-ui, sans-serif;
+.dark {
+  --color-bg: #0f0f0f;
+  --color-text: #f5f5f5;
+  --color-nav-bg: #1a1a1a1A;
+  --color-nav-mobile-bg: #1a1a1a;
+  --color-nav-text: #f5f5f5;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/*
+ * KAG Brand Fonts
+ * Based on KAG Brand Guidelines 2025
+ *
+ * English:
+ *   - Poppins: Headlines
+ *   - Altair: Decorative/Feature Headlines
+ *   - Outfit: Body Text
+ *
+ * Arabic:
+ *   - Sahel: Headlines
+ *   - TheYearofHandicrafts: Decorative/Feature Headlines
+ *   - Noto Sans Arabic: Body Text
+ */
+
+/* Poppins - Headlines English */
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Outfit - Body Text English */
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Altair - Decorative Headlines English */
+@font-face {
+  font-family: 'Altair';
+  src: url('/fonts/Altair-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Sahel - Headlines Arabic */
+@font-face {
+  font-family: 'Sahel';
+  src: url('/fonts/sahel-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* TheYearofHandicrafts - Decorative Headlines Arabic */
+@font-face {
+  font-family: 'TheYearofHandicrafts';
+  src: url('/fonts/TheYearofHandicraftsTTF-Reg.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TheYearofHandicrafts';
+  src: url('/fonts/TheYearofHandicraftsTTF-Med.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TheYearofHandicrafts';
+  src: url('/fonts/TheYearofHandicraftsTTF-SemBd.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TheYearofHandicrafts';
+  src: url('/fonts/TheYearofHandicraftsTTF-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Noto Sans Arabic - Body Text Arabic */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  src: url('/fonts/NotoSansArabic-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  src: url('/fonts/NotoSansArabic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  src: url('/fonts/NotoSansArabic-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  src: url('/fonts/NotoSansArabic-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  src: url('/fonts/NotoSansArabic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /*
+   * KAG Brand Colors
+   * Based on KAG Full Identity Branding Presentation - V3
+   */
+
+  /* Dazzling Blue - Primary */
+  --color-primary-50: #eef4ff;
+  --color-primary-100: #dce8ff;
+  --color-primary-200: #b9d1ff;
+  --color-primary-300: #8ab4ff;
+  --color-primary-400: #5a8fe8;
+  --color-primary-500: #4a6bc4;
+  --color-primary-600: #3b5998;
+  --color-primary-700: #324d82;
+  --color-primary-800: #2a406b;
+  --color-primary-900: #243659;
+  --color-primary-950: #172236;
+
+  /* Pear Yellow/Green - Secondary */
+  --color-secondary-50: #f9fce6;
+  --color-secondary-100: #f2f8c8;
+  --color-secondary-200: #e5f196;
+  --color-secondary-300: #d4e65a;
+  --color-secondary-400: #c4d600;
+  --color-secondary-500: #a8ba00;
+  --color-secondary-600: #859400;
+  --color-secondary-700: #657000;
+  --color-secondary-800: #505900;
+  --color-secondary-900: #434a00;
+  --color-secondary-950: #242800;
+
+  /* Skyan (Cyan/Turquoise) - Accent */
+  --color-accent-50: #e6fffe;
+  --color-accent-100: #b3fffc;
+  --color-accent-200: #80fff9;
+  --color-accent-300: #4df5ed;
+  --color-accent-400: #3aded5;
+  --color-accent-500: #2ac4bc;
+  --color-accent-600: #1fa39c;
+  --color-accent-700: #17827c;
+  --color-accent-800: #12665f;
+  --color-accent-900: #0d524d;
+  --color-accent-950: #073330;
+
+  /* Jasmine Green */
+  --color-jasmine-50: #f0fdf0;
+  --color-jasmine-100: #dcfcdc;
+  --color-jasmine-200: #bbf7bb;
+  --color-jasmine-300: #86ef86;
+  --color-jasmine-400: #6cd96c;
+  --color-jasmine-500: #4abe4a;
+  --color-jasmine-600: #3a9d3a;
+  --color-jasmine-700: #317b31;
+  --color-jasmine-800: #2c622c;
+  --color-jasmine-900: #275127;
+  --color-jasmine-950: #112c11;
+
+  /* Tangerine (Orange) */
+  --color-tangerine-50: #fff5f0;
+  --color-tangerine-100: #ffe8dd;
+  --color-tangerine-200: #ffd0bb;
+  --color-tangerine-300: #ffae8a;
+  --color-tangerine-400: #ff7f4d;
+  --color-tangerine-500: #f04e23;
+  --color-tangerine-600: #dc3912;
+  --color-tangerine-700: #b62d0d;
+  --color-tangerine-800: #942712;
+  --color-tangerine-900: #782414;
+  --color-tangerine-950: #410f06;
+
+  /* Font Families */
+  --font-family-poppins: 'Poppins', system-ui, sans-serif;
+  --font-family-outfit: 'Outfit', system-ui, sans-serif;
+  --font-family-altair: 'Altair', system-ui, sans-serif;
+  --font-family-sahel: 'Sahel', system-ui, sans-serif;
+  --font-family-handicrafts: 'TheYearofHandicrafts', system-ui, sans-serif;
+  --font-family-noto-arabic: 'Noto Sans Arabic', system-ui, sans-serif;
+}
+
+/*
+ * Font Utility Classes
+ *
+ * English:
+ *   .font-heading    -> Poppins (for headlines)
+ *   .font-display    -> Altair (for decorative headlines)
+ *   .font-body       -> Outfit (for body text)
+ *
+ * Arabic:
+ *   .font-heading-ar -> Sahel (for headlines)
+ *   .font-display-ar -> TheYearofHandicrafts (for decorative headlines)
+ *   .font-body-ar    -> Noto Sans Arabic (for body text)
+ */
+
+/* English Fonts */
+.font-heading {
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: 'Altair', system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+/* Arabic Fonts */
+.font-heading-ar {
+  font-family: 'Sahel', system-ui, sans-serif;
+}
+
+.font-display-ar {
+  font-family: 'TheYearofHandicrafts', system-ui, sans-serif;
+}
+
+.font-body-ar {
+  font-family: 'Noto Sans Arabic', system-ui, sans-serif;
+}
+
+/* Legacy support */
+.font-poppins {
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+.font-altair {
+  font-family: 'Altair', system-ui, sans-serif;
+}
+
+.font-handicrafts {
+  font-family: 'TheYearofHandicrafts', system-ui, sans-serif;
 }
 
 .font-noto-arabic {
-  font-family: var(--font-noto-arabic), system-ui, sans-serif;
+  font-family: 'Noto Sans Arabic', system-ui, sans-serif;
+}
+
+.font-sahel {
+  font-family: 'Sahel', system-ui, sans-serif;
 }

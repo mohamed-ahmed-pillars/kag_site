@@ -78,7 +78,7 @@ export function ThemeToggle() {
                 style={{
                     position: 'absolute',
                     top: 3,
-                    left: 3,
+                    insetInlineStart: 3,
                     width: 22,
                     height: 22,
                     borderRadius: 9999,

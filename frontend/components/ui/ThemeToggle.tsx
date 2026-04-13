@@ -12,12 +12,8 @@ export function ThemeToggle() {
         setMounted(true);
     }, []);
 
-    const isDark = resolvedTheme === 'dark';
-
-    const toggle = () => setTheme(isDark ? 'light' : 'dark');
-
     if (!mounted) {
-        // Skeleton to prevent layout shift
+        // Skeleton prevents layout shift; uses CSS var so dark OS preference is respected
         return (
             <div
                 aria-hidden="true"
@@ -25,17 +21,22 @@ export function ThemeToggle() {
                     width: 56,
                     height: 28,
                     borderRadius: 9999,
-                    background: '#e8e8e8',
+                    background: 'var(--color-nav-mobile-bg, #e8e8e8)',
                     flexShrink: 0,
                 }}
             />
         );
     }
 
+    const isDark = resolvedTheme === 'dark';
+    const toggle = () => setTheme(isDark ? 'light' : 'dark');
+
     return (
         <button
+            type="button"
             onClick={toggle}
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
             style={{
                 position: 'relative',
                 display: 'flex',
@@ -47,45 +48,42 @@ export function ThemeToggle() {
                 border: 'none',
                 cursor: 'pointer',
                 flexShrink: 0,
-                transition: 'background 0.3s ease, box-shadow 0.3s ease',
                 background: isDark ? '#1e1e1e' : '#e8e8e8',
                 boxShadow: isDark
                     ? '4px 4px 8px #111111, -4px -4px 8px #2e2e2e'
                     : '4px 4px 8px #c8c8c8, -4px -4px 8px #ffffff',
             }}
         >
-            {/* Sun icon */}
+            {/* Sun icon — logical start position handles RTL automatically */}
             <Sun
                 size={13}
+                className="absolute start-[6px] z-[1]"
                 style={{
-                    position: 'absolute',
-                    left: 6,
                     color: isDark ? '#555555' : '#f59e0b',
                     transition: 'color 0.3s ease',
-                    zIndex: 1,
                 }}
             />
-            {/* Moon icon */}
+            {/* Moon icon — logical end position handles RTL automatically */}
             <Moon
                 size={13}
+                className="absolute end-[6px] z-[1]"
                 style={{
-                    position: 'absolute',
-                    right: 6,
                     color: isDark ? '#a78bfa' : '#aaaaaa',
                     transition: 'color 0.3s ease',
-                    zIndex: 1,
                 }}
             />
-            {/* Sliding circle */}
+            {/* Sliding circle — uses transform (GPU-composited) instead of left transition.
+                Dark offset = width(56) - circle(22) - right-gap(3) - left-base(3) = 28px */}
             <span
                 style={{
                     position: 'absolute',
                     top: 3,
-                    left: isDark ? 'calc(100% - 25px)' : 3,
+                    left: 3,
                     width: 22,
                     height: 22,
                     borderRadius: 9999,
-                    transition: 'left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transform: isDark ? 'translateX(28px)' : 'translateX(0)',
+                    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     background: isDark ? '#2a2a2a' : '#ffffff',
                     boxShadow: isDark
                         ? 'inset 2px 2px 4px #111111, inset -2px -2px 4px #3a3a3a'

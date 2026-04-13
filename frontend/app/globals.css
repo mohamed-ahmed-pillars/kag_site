@@ -5,15 +5,16 @@
 :root {
   --color-bg: #ffffff;
   --color-text: #09090b;
-  --color-nav-bg: #f5f5f51A;
+  --color-nav-bg: #f5f5f51a;
   --color-nav-mobile-bg: #f5f5f5;
   --color-nav-text: #09090b;
 }
 
+/* Applied when class="dark" is set on <html> by next-themes */
 .dark {
   --color-bg: #0f0f0f;
   --color-text: #f5f5f5;
-  --color-nav-bg: #1a1a1a1A;
+  --color-nav-bg: #1a1a1a1a;
   --color-nav-mobile-bg: #1a1a1a;
   --color-nav-text: #f5f5f5;
 }

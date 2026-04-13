@@ -1,25 +1,30 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Noto_Sans_Arabic } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { Footer, WhatsAppButton, ScrollToTop } from '@/components/layout';
+import SmoothScroll from '@/components/layout/SmoothScroll';
+import { ScrollToHash } from '@/components/ui/scroll-to-hash';
 import '../globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
-
-const notoArabic = Noto_Sans_Arabic({
-  subsets: ['arabic'],
-  variable: '--font-noto-arabic',
-});
+import { Header } from '@/components/layout/Header';
+import { ThemeProvider } from '@/components/layout/ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'KAG - Food Manufacturing & Export',
   description: 'Premium Egyptian food products for global markets',
+  icons: {
+    icon: [
+      {
+        url: '/icon-light.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+    ],
+  },
 };
 
 export default async function LocaleLayout({
@@ -39,15 +44,23 @@ export default async function LocaleLayout({
   const isRTL = locale === 'ar';
 
   return (
-    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'}>
+    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${notoArabic.variable} ${
-          isRTL ? 'font-noto-arabic' : 'font-inter'
-        } antialiased`}
+        className={`${isRTL ? 'font-noto-arabic' : 'font-outfit'
+          } antialiased`}
       >
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <SmoothScroll>
+              <Header />
+              <main className="relative z-10 -mt-14 md:-mt-16 rounded-b-[3.5rem] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.15)]">{children}</main>
+              <Footer />
+              <WhatsAppButton />
+              <ScrollToTop />
+              <ScrollToHash />
+            </SmoothScroll>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

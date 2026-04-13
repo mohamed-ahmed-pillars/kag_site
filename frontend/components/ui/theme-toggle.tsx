@@ -82,7 +82,11 @@ export function ThemeToggle() {
                     width: 22,
                     height: 22,
                     borderRadius: 9999,
-                    transform: isDark ? 'translateX(28px)' : 'translateX(0)',
+                    transform: isDark
+                        ? typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
+                            ? 'translateX(-28px)'
+                            : 'translateX(28px)'
+                        : 'translateX(0)',
                     transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     background: isDark ? '#2a2a2a' : '#ffffff',
                     boxShadow: isDark

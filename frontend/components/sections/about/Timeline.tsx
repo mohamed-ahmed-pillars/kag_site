@@ -1,10 +1,27 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import { useTheme } from 'next-themes';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Container, SectionTitle } from '@/components/ui';
+
+function useIsDark() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return false;
+  return resolvedTheme === 'dark';
+}
+
+// ── Timeline colors — edit here to test ───────────────────────────
+const timelineColors = (isDark: boolean) => ({
+  yearBadge:  isDark ? '#d1d5db' : '#354c9a',   // year pill text
+  itemTitle:  isDark ? '#f3f4f6' : '#354c9a',   // milestone h3 title
+  centerDot:  isDark ? '#6b7280' : '#354c9a',   // center timeline dot
+});
+// ─────────────────────────────────────────────────────────────────
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +37,7 @@ const milestones = [
 export default function Timeline() {
   const t = useTranslations('about.timeline');
   const locale = useLocale();
+  const C = timelineColors(useIsDark());
   const timelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,13 +59,13 @@ export default function Timeline() {
   }, []);
 
   return (
-    <section className="py-20 bg-white" ref={timelineRef}>
+    <section className="py-20 bg-white dark:bg-[#0f0f0f]" ref={timelineRef}>
       <Container>
         <SectionTitle title={t('title')} subtitle={t('subtitle')} />
 
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-[#d8d8d8] hidden md:block" />
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-[#d8d8d8] dark:bg-[#333] hidden md:block" />
 
           {/* Timeline Items */}
           <div className="space-y-12">
@@ -61,19 +79,18 @@ export default function Timeline() {
                 {/* Content */}
                 <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:text-end md:pe-8' : 'md:text-start md:ps-8'}`}>
                   <div
-                    className="rounded-xl p-6 bg-[#f5f5f5]"
-                    style={{ borderTop: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 8px 16px -4px rgba(0,0,0,0.2), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.9)' }}
+                    className="rounded-xl p-6 bg-[#f5f5f5] dark:bg-[#1e1e1e]"
+                    style={{ borderTop: 'var(--card-border-top)', boxShadow: 'var(--card-shadow)' }}
                   >
                     <span
-                      className="inline-block px-3 py-1 rounded-full text-sm font-bold text-gray-700 mb-3"
-                      style={{ background: '#ebebeb', boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)' }}
+                      className="inline-block px-3 py-1 rounded-full text-sm font-bold mb-3" style={{ color: C.yearBadge, background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }}
                     >
                       {milestone.year}
                     </span>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    <h3 className="text-lg font-semibold mb-2" style={{ color: C.itemTitle }}>
                       {t(`milestones.${milestone.key}.title`)}
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
                       {t(`milestones.${milestone.key}.description`)}
                     </p>
                   </div>
@@ -82,7 +99,7 @@ export default function Timeline() {
                 {/* Center Dot */}
                 <div
                   className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full"
-                  style={{ background: '#e0e0e0', boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.12), inset -2px -2px 4px rgba(255,255,255,0.9)' }}
+                  style={{ background: C.centerDot }}
                 />
 
                 {/* Spacer */}

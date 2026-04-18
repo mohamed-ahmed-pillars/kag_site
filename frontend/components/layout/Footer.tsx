@@ -43,7 +43,7 @@ export default function Footer() {
               alt="KAG"
               width={100}
               height={40}
-              className="w-24 h-auto brightness-0"
+              className="w-24 h-auto brightness-0 dark:invert"
             />
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
               {locale === 'ar'
@@ -59,7 +59,7 @@ export default function Footer() {
                   aria-label={label}
                   className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200 bg-[#f0f0f0] dark:bg-[#2a2a2a]"
                   style={{
-                    boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)',
+                    boxShadow: 'var(--neuo-badge-shadow)',
                   }}
                 >
                   <Icon className="w-4 h-4" />
@@ -136,13 +136,27 @@ export default function Footer() {
         <div
           className="h-px w-full mb-6"
           style={{
-            background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)',
+            background: 'linear-gradient(90deg, transparent, rgba(128,128,128,0.2), transparent)',
           }}
         />
 
         {/* Bottom row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-400 dark:text-gray-500">
           <p>© {currentYear} Technology Pillars. {t('footer.rights')}</p>
+          <div className="flex items-center gap-4">
+            <Link
+              href={`/${locale}/terms`}
+              className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
+            >
+              {t('footer.terms')}
+            </Link>
+            <Link
+              href={`/${locale}/privacy`}
+              className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
+            >
+              {t('footer.privacy')}
+            </Link>
+          </div>
           <p className="text-gray-300 dark:text-gray-600 text-[11px]">
             {locale === 'ar' ? 'صُنع بـ ❤️ في مصر' : 'Made with ❤️ in Egypt'}
           </p>

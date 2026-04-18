@@ -10,7 +10,7 @@ export default function TermsPage() {
   const sections = t.raw('sections') as { title: string; body: string }[];
 
   return (
-    <section className="py-20 bg-white dark:bg-[#0f0f0f]">
+    <section className="py-20 bg-white dark:bg-[#0f0f0f] min-h-screen">
       <Container>
         {/* Hero */}
         <div className="text-center mb-16">

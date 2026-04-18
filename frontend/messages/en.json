@@ -55,12 +55,14 @@
       "years": "Years of Excellence"
     },
     "products": {
+      "badge": "PRODUCTS",
       "title": "Our Products",
       "subtitle": "Discover our range of premium quality food products, manufactured with the finest ingredients and exported worldwide.",
       "viewProduct": "View Details",
       "viewAll": "View All Products"
     },
     "certifications": {
+      "badge": "CERTIFICATIONS",
       "title": "Our Certifications",
       "subtitle": "We maintain the highest international standards in food safety and quality.",
       "verified": "Verified"
@@ -83,6 +85,7 @@
       "viewAll": "View All News"
     },
     "newsletter": {
+      "badge": "NEWSLETTER",
       "title": "Stay Updated",
       "subtitle": "Subscribe to our newsletter to receive the latest news, product updates, and industry insights.",
       "placeholder": "Enter your email",
@@ -90,7 +93,7 @@
       "success": "Thank you for subscribing!",
       "privacy": "We respect your privacy. Unsubscribe at any time."
     },
-    "quote": "*KAG* *has* *been* *a* trusted *leader* *in* food *manufacturing* *and* export *for* *over* 25 *years,* *delivering* premium *products* *to* *more* *than* 30 *countries* *with* 500 *satisfied* clients *worldwide.*",
+    "quote": "~KAG~ *has* *been* *a* trusted *leader* *in* food *manufacturing* *and* export *for* *over* 25 *years,* *delivering* premium *products* *to* *more* *than* 30 *countries* *with* 500 *satisfied* clients *worldwide.*",
     "benefits": {
       "badge": "BENEFITS",
       "title": "Why Choose Us",
@@ -107,6 +110,12 @@
         "title": "Trusted Partner",
         "description": "500+ satisfied clients worldwide built on trust, consistency, and excellence."
       }
+    },
+    "privateLabel": {
+      "badge": "PRIVATE LABEL",
+      "title": "We Manufacture For You",
+      "subtitle": "Private label and contract manufacturing services with international quality standards.",
+      "cta": "Request a Quote"
     },
     "whatWeOffer": {
       "title": "What We Offer",
@@ -310,6 +319,7 @@
       "continents": "Continents"
     },
     "process": {
+      "badge": "PROCESS",
       "title": "Our Export Process",
       "subtitle": "A seamless journey from inquiry to delivery",
       "steps": {
@@ -336,6 +346,7 @@
       }
     },
     "destinations": {
+      "badge": "DESTINATIONS",
       "title": "Export Destinations",
       "subtitle": "We reach customers across the globe",
       "regions": {
@@ -347,6 +358,7 @@
       }
     },
     "packaging": {
+      "badge": "PACKAGING",
       "title": "Packaging Solutions",
       "subtitle": "Flexible options for every need",
       "options": {
@@ -475,7 +487,9 @@
     "rights": "All rights reserved",
     "quickLinks": "Quick Links",
     "contactUs": "Contact Us",
-    "followUs": "Follow Us"
+    "followUs": "Follow Us",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
   },
   "quotation": {
     "hero": {
@@ -546,5 +560,77 @@
       "reference": "Reference Number",
       "backHome": "Back to Home"
     }
+  },
+  "terms": {
+    "hero": {
+      "badge": "Legal",
+      "title": "Terms & Conditions",
+      "subtitle": "Please read these terms carefully before using our website and services."
+    },
+    "lastUpdated": "Last updated: April 2026",
+    "sections": [
+      {
+        "title": "Acceptance of Terms",
+        "body": "By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use this site."
+      },
+      {
+        "title": "Use License",
+        "body": "Permission is granted to temporarily download one copy of the materials on KAG's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not modify or copy the materials, use the materials for any commercial purpose, attempt to decompile or reverse engineer any software contained on the website, remove any copyright or other proprietary notations from the materials, or transfer the materials to another person."
+      },
+      {
+        "title": "Disclaimer",
+        "body": "The materials on KAG's website are provided on an 'as is' basis. KAG makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights."
+      },
+      {
+        "title": "Limitations",
+        "body": "In no event shall KAG or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on KAG's website, even if KAG or a KAG authorized representative has been notified orally or in writing of the possibility of such damage."
+      },
+      {
+        "title": "Contact Information",
+        "body": "If you have any questions about these Terms & Conditions, please contact us at our facility: 10th of Ramadan City, Industrial Zone, Sharkia Governorate, Egypt, or via email at info@kagegypt.com."
+      }
+    ]
+  },
+  "privacy": {
+    "hero": {
+      "badge": "Legal",
+      "title": "Privacy Policy",
+      "subtitle": "Your privacy matters to us. Learn how we collect, use, and protect your personal information."
+    },
+    "lastUpdated": "Last updated: April 2026",
+    "sections": [
+      {
+        "title": "Information We Collect",
+        "body": "We collect information you provide directly to us, including your name, email address, phone number, company information, and any messages you send us when contacting us or requesting a quotation."
+      },
+      {
+        "title": "How We Use Your Information",
+        "body": "We use the information we collect to respond to your inquiries, process quotation requests, send newsletters and updates (with your permission), improve our website and services, and comply with legal obligations."
+      },
+      {
+        "title": "Information Sharing",
+        "body": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except when required by law or to protect our rights and the safety of others."
+      },
+      {
+        "title": "Data Security",
+        "body": "We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security."
+      },
+      {
+        "title": "Cookies",
+        "body": "Our website may use cookies to enhance your browsing experience. You can choose to disable cookies through your browser settings, though this may affect some functionality of the site."
+      },
+      {
+        "title": "Your Rights",
+        "body": "You have the right to access, correct, or delete your personal data at any time. You may also unsubscribe from our communications at any time by contacting us directly or using the unsubscribe link in our emails."
+      },
+      {
+        "title": "Contact Information",
+        "body": "For any privacy-related requests or questions, please contact us at: 10th of Ramadan City, Industrial Zone, Sharkia Governorate, Egypt, or via email at info@kagegypt.com."
+      },
+      {
+        "title": "Policy Updates",
+        "body": "We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically."
+      }
+    ]
   }
 }

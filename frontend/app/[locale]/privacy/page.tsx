@@ -1,18 +1,28 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
+import { getTranslations } from 'next-intl/server';
 import { ShieldCheck } from 'lucide-react';
 import { Container } from '@/components/ui';
+import LegalSections from '@/components/sections/LegalSections';
+import type { Metadata } from 'next';
 
-export default function PrivacyPage() {
-  const t = useTranslations('privacy');
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'privacy' });
+  return {
+    title: t('hero.title'),
+    description: t('hero.subtitle'),
+  };
+}
+
+export default async function PrivacyPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'privacy' });
   const sections = t.raw('sections') as { title: string; body: string }[];
 
   return (
     <section className="py-20 bg-white dark:bg-[#0f0f0f] min-h-screen">
       <Container>
-        {/* Hero */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-4">
             <div
@@ -32,32 +42,7 @@ export default function PrivacyPage() {
             {t('hero.subtitle')}
           </p>
         </div>
-
-        {/* Sections */}
-        <div className="max-w-3xl mx-auto space-y-6">
-          {sections.map((section, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="rounded-3xl p-8 bg-[#f5f5f5] dark:bg-[#1e1e1e]"
-              style={{ borderTop: 'var(--card-border-top)', boxShadow: 'var(--card-shadow)' }}
-            >
-              <h2 className="text-lg font-bold mb-3 text-[#354c9a] dark:text-gray-100">
-                {i + 1}. {section.title}
-              </h2>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
-                {section.body}
-              </p>
-            </motion.div>
-          ))}
-
-          <p className="text-center text-xs text-gray-400 dark:text-gray-600 pt-4">
-            {t('lastUpdated')}
-          </p>
-        </div>
+        <LegalSections sections={sections} lastUpdated={t('lastUpdated')} />
       </Container>
     </section>
   );

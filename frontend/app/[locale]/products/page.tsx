@@ -12,7 +12,7 @@ export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState('all');
 
   return (
-    <section className="py-20 bg-white min-h-screen">
+    <section className="py-20 min-h-screen">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -22,13 +22,13 @@ export default function ProductsPage() {
           {/* Neumorphic badge */}
           <div className="flex justify-center mb-4">
             <div
-              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5]"
+              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] dark:bg-[#1e1e1e]"
               style={{
-                borderTop: '1px solid rgba(255,255,255,0.8)',
-                boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+                borderTop: 'var(--card-border-top)',
+                boxShadow: 'var(--card-shadow)',
               }}
             >
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
                 <Package className="w-4 h-4" />
                 {t('badge') || 'PRODUCTS'}
               </span>

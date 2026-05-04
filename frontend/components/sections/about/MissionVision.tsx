@@ -1,9 +1,27 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
 import { Target, Eye, Heart, Sparkles } from 'lucide-react';
 import { Container } from '@/components/ui';
+
+function useIsDark() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return false;
+  return resolvedTheme === 'dark';
+}
+
+// ── MissionVision colors — edit here to test ──────────────────────
+const mvColors = (isDark: boolean) => ({
+  cardIcon:   isDark ? '#9ca3af' : '#354c9a',   // Mission/Vision/Values icons
+  cardTitle:  isDark ? '#f3f4f6' : '#354c9a',   // card h3 titles
+  heading:    isDark ? '#f3f4f6' : '#111827',   // section h2
+});
+// ─────────────────────────────────────────────────────────────────
 
 const cards = [
   { key: 'mission', icon: Target },
@@ -13,19 +31,20 @@ const cards = [
 
 export default function MissionVision() {
   const t = useTranslations('about.missionVision');
+  const C = mvColors(useIsDark());
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-[#0f0f0f]">
       <Container>
         <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] mb-4"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)' }}
+            className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] dark:bg-[#1e1e1e] mb-4"
+            style={{ borderTop: 'var(--card-border-top)', boxShadow: 'var(--card-shadow)' }}
           >
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-900">
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
               <Sparkles className="w-4 h-4" />
               {t('badge')}
             </span>
@@ -34,7 +53,7 @@ export default function MissionVision() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-gray-900"
+            className="text-3xl md:text-4xl font-bold" style={{ color: C.heading }}
           >
             {t('title')}
           </motion.h2>
@@ -52,19 +71,19 @@ export default function MissionVision() {
                 transition={{ delay: index * 0.1 }}
               >
                 <div
-                  className="h-full rounded-2xl p-8 bg-[#f5f5f5]"
-                  style={{ borderTop: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 8px 16px -4px rgba(0,0,0,0.2), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.9)' }}
+                  className="h-full rounded-2xl p-8 bg-[#f5f5f5] dark:bg-[#1e1e1e]"
+                  style={{ borderTop: 'var(--card-border-top)', boxShadow: 'var(--card-shadow)' }}
                 >
                   <div
                     className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
-                    style={{ background: '#ebebeb', boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)' }}
+                    style={{ background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }}
                   >
-                    <Icon className="w-8 h-8 text-gray-600" />
+                    <Icon className="w-8 h-8" style={{ color: C.cardIcon }} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-xl font-bold mb-4" style={{ color: C.cardTitle }}>
                     {t(`${card.key}.title`)}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                     {t(`${card.key}.description`)}
                   </p>
                 </div>

@@ -1,10 +1,76 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
+import { useTheme } from 'next-themes';
 import { Shield, CheckCircle, X, Calendar, Building2 } from 'lucide-react';
 import { FeatureCard } from '@/components/ui/feature-card';
+
+function useIsDark() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return false;
+  return resolvedTheme === 'dark';
+}
+
+// ── Certification page illustration colors — edit here to test ─────
+
+const isoColors = (isDark: boolean) => ({
+  tickMajor:  "#888",
+  tickMinor:  "#c0c0c0",
+  bezelFrom:  "#eeeeee",
+  bezelTo:    "#d8d8d8",
+  checkmark:  isDark ? "#555" : "#354c9a",
+});
+
+const haccpColors = (isDark: boolean) => ({
+  line:       "#ccc",
+  nodeCircle: "#e8e8e8",
+  nodeText:   isDark ? "#555" : "#354c9a",
+});
+
+const halalColors = (isDark: boolean) => ({
+  circleFrom:     "#efefef",
+  circleTo:       "#dcdcdc",
+  crescent:       isDark ? "#444" : "#354c9a",
+  crescentCutout: "#e8e8e8",
+});
+
+const fdaColors = (isDark: boolean) => ({
+  discFrom:      "#f0f0f0",
+  discTo:        "#d8d8d8",
+  pillLeft:      "#d0d0d0",
+  pillLeftText:  isDark ? "#555" : "#354c9a",
+  pillRight:     isDark ? "#444" : "#354c9a",
+  pillRightText: "#fff",
+});
+
+const organicColors = (isDark: boolean) => ({
+  discFrom:  "#f0f0f0",
+  discTo:    "#d8d8d8",
+  stem:      isDark ? "#555" : "#354c9a",
+  leaf:      isDark ? "#555" : "#354c9a",
+  vein:      "#e8e8e8",
+  particles: "#aaa",
+});
+
+const brcColors = (isDark: boolean) => ({
+  discFrom:    "#f0f0f0",
+  discTo:      "#d8d8d8",
+  outerRing:   isDark ? "#888" : "#354c9a",
+  ellipse:     isDark ? "#555" : "#6b7280",
+  latitudeLine: isDark ? "#555" : "#9ca3af",
+  latitudeFaint: isDark ? "#444" : "#bbb",
+});
+
+const pageColors = (isDark: boolean) => ({
+  modalIcon:    isDark ? "#d1d5db" : "#354c9a",   // shield icon in modal
+  modalVerified: isDark ? "#d1d5db" : "#354c9a",  // verified checkmark
+});
+
+// ──────────────────────────────────────────────────────────────────
 
 const certifications = [
   {
@@ -71,10 +137,12 @@ const certifications = [
 
 /* ── Shared badge pill ── */
 function CertBadge({ children }: { children: React.ReactNode }) {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
   return (
     <div
-      className="px-3 py-1 rounded-full text-[9px] font-bold tracking-[0.18em] uppercase text-gray-600 whitespace-nowrap"
-      style={{ background: '#f0f0f0', boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)' }}
+      className="px-3 py-1 rounded-full text-[9px] font-bold tracking-[0.18em] uppercase text-gray-600 dark:text-gray-300 whitespace-nowrap"
+      style={{ background: isDark ? '#2a2a2a' : '#f0f0f0', boxShadow: isDark ? '3px 3px 6px rgba(0,0,0,0.5), -2px -2px 5px rgba(255,255,255,0.04)' : '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)' }}
     >
       {children}
     </div>
@@ -83,20 +151,21 @@ function CertBadge({ children }: { children: React.ReactNode }) {
 
 /* ── Illustrations ── */
 function IsoIllustration() {
+  const C = isoColors(useIsDark());
   const segments = Array.from({ length: 12 }, (_, i) => i);
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       <motion.div className="absolute w-32 h-32 rounded-full" animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}>
         {segments.map((i) => (
           <div key={i} className="absolute w-full h-full" style={{ transform: `rotate(${i * 30}deg)` }}>
-            <div className="absolute left-1/2" style={{ top: 4, width: i % 3 === 0 ? 3 : 2, height: i % 3 === 0 ? 10 : 6, marginLeft: i % 3 === 0 ? -1.5 : -1, borderRadius: 2, background: i % 3 === 0 ? '#888' : '#c0c0c0' }} />
+            <div className="absolute left-1/2" style={{ top: 4, width: i % 3 === 0 ? 3 : 2, height: i % 3 === 0 ? 10 : 6, marginLeft: i % 3 === 0 ? -1.5 : -1, borderRadius: 2, background: i % 3 === 0 ? C.tickMajor : C.tickMinor }} />
           </div>
         ))}
       </motion.div>
-      <div className="absolute w-24 h-24 rounded-full" style={{ background: 'linear-gradient(145deg, #eeeeee, #d8d8d8)', boxShadow: 'inset 3px 3px 7px rgba(0,0,0,0.1), inset -3px -3px 7px rgba(255,255,255,0.9)' }} />
+      <div className="absolute w-24 h-24 rounded-full" style={{ background: `linear-gradient(145deg, ${C.bezelFrom}, ${C.bezelTo})`, boxShadow: 'inset 3px 3px 7px rgba(0,0,0,0.1), inset -3px -3px 7px rgba(255,255,255,0.9)' }} />
       <motion.div className="relative z-10 flex items-center justify-center" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.3, type: 'spring', stiffness: 260, damping: 18 }}>
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-          <motion.path d="M5 13l4 4L19 7" stroke="#333" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.5, duration: 0.6, ease: 'easeOut' }} />
+          <motion.path d="M5 13l4 4L19 7" stroke={C.checkmark} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.5, duration: 0.6, ease: 'easeOut' }} />
         </svg>
       </motion.div>
       <motion.div className="absolute bottom-7 left-1/2 -translate-x-1/2" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
@@ -107,18 +176,19 @@ function IsoIllustration() {
 }
 
 function HaccpIllustration() {
+  const C = haccpColors(useIsDark());
   const nodes = [{ x: 50, y: 22, label: 'H' }, { x: 20, y: 52, label: 'A' }, { x: 80, y: 52, label: 'C' }, { x: 50, y: 80, label: 'CP' }];
   const lines: [number, number][] = [[0, 1], [0, 2], [1, 3], [2, 3]];
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       <svg className="absolute" width="200" height="180" viewBox="0 0 100 110">
         {lines.map(([a, b], i) => (
-          <motion.line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y} stroke="#ccc" strokeWidth="1.5" strokeDasharray="4 3" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ delay: 0.2 + i * 0.12, duration: 0.4 }} />
+          <motion.line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y} stroke={C.line} strokeWidth="1.5" strokeDasharray="4 3" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ delay: 0.2 + i * 0.12, duration: 0.4 }} />
         ))}
         {nodes.map((n, i) => (
           <motion.g key={i} initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 + i * 0.1, type: 'spring', stiffness: 280, damping: 18 }} style={{ transformOrigin: `${n.x}px ${n.y}px` }}>
-            <circle cx={n.x} cy={n.y} r="11" fill="#e8e8e8" style={{ filter: 'drop-shadow(2px 2px 3px rgba(0,0,0,0.12)) drop-shadow(-1px -1px 2px rgba(255,255,255,0.9))' }} />
-            <text x={n.x} y={n.y + 4} textAnchor="middle" fontSize="7" fontWeight="700" fill="#555">{n.label}</text>
+            <circle cx={n.x} cy={n.y} r="11" fill={C.nodeCircle} style={{ filter: 'drop-shadow(2px 2px 3px rgba(0,0,0,0.12)) drop-shadow(-1px -1px 2px rgba(255,255,255,0.9))' }} />
+            <text x={n.x} y={n.y + 4} textAnchor="middle" fontSize="7" fontWeight="700" fill={C.nodeText}>{n.label}</text>
           </motion.g>
         ))}
       </svg>
@@ -130,14 +200,15 @@ function HaccpIllustration() {
 }
 
 function HalalIllustration() {
+  const C = halalColors(useIsDark());
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       <motion.div className="absolute w-28 h-28 rounded-full" style={{ border: '1.5px solid rgba(0,0,0,0.07)' }} animate={{ scale: [1, 1.5], opacity: [0.5, 0] }} transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }} />
-      <div className="absolute w-24 h-24 rounded-full" style={{ background: 'linear-gradient(145deg, #efefef, #dcdcdc)', boxShadow: '6px 6px 14px rgba(0,0,0,0.1), -4px -4px 10px rgba(255,255,255,0.92)' }} />
+      <div className="absolute w-24 h-24 rounded-full" style={{ background: `linear-gradient(145deg, ${C.circleFrom}, ${C.circleTo})`, boxShadow: '6px 6px 14px rgba(0,0,0,0.1), -4px -4px 10px rgba(255,255,255,0.92)' }} />
       <motion.svg className="relative z-10" width="52" height="52" viewBox="0 0 52 52" initial={{ scale: 0, rotate: -30, opacity: 0 }} animate={{ scale: 1, rotate: 0, opacity: 1 }} transition={{ delay: 0.2, type: 'spring', stiffness: 220, damping: 16 }}>
-        <circle cx="24" cy="26" r="16" fill="#444" />
-        <circle cx="30" cy="20" r="13" fill="#e8e8e8" />
-        <polygon points="40,10 41.5,14.5 46,14.5 42.5,17.5 43.8,22 40,19.2 36.2,22 37.5,17.5 34,14.5 38.5,14.5" fill="#444" />
+        <circle cx="24" cy="26" r="16" fill={C.crescent} />
+        <circle cx="30" cy="20" r="13" fill={C.crescentCutout} />
+        <polygon points="40,10 41.5,14.5 46,14.5 42.5,17.5 43.8,22 40,19.2 36.2,22 37.5,17.5 34,14.5 38.5,14.5" fill={C.crescent} />
       </motion.svg>
       <motion.div className="absolute bottom-7 left-1/2 -translate-x-1/2" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
         <CertBadge>Halal</CertBadge>
@@ -147,12 +218,13 @@ function HalalIllustration() {
 }
 
 function FdaIllustration() {
+  const C = fdaColors(useIsDark());
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <div className="absolute w-28 h-28 rounded-full" style={{ background: 'linear-gradient(145deg, #f0f0f0, #d8d8d8)', boxShadow: '7px 7px 14px rgba(0,0,0,0.1), -5px -5px 12px rgba(255,255,255,0.92)' }} />
+      <div className="absolute w-28 h-28 rounded-full" style={{ background: `linear-gradient(145deg, ${C.discFrom}, ${C.discTo})`, boxShadow: '7px 7px 14px rgba(0,0,0,0.1), -5px -5px 12px rgba(255,255,255,0.92)' }} />
       <motion.div className="relative z-10 flex overflow-hidden" style={{ width: 56, height: 26, borderRadius: 13, boxShadow: '3px 3px 6px rgba(0,0,0,0.12), -2px -2px 5px rgba(255,255,255,0.9)' }} initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2, type: 'spring', stiffness: 260, damping: 18 }}>
-        <div className="flex-1 bg-[#d0d0d0] flex items-center justify-center"><span style={{ fontSize: 8, fontWeight: 800, color: '#555', letterSpacing: 1 }}>FDA</span></div>
-        <div className="flex-1 bg-[#444] flex items-center justify-center"><span style={{ fontSize: 8, fontWeight: 800, color: '#fff', letterSpacing: 1 }}>✓</span></div>
+        <div className="flex-1 flex items-center justify-center" style={{ background: C.pillLeft }}><span style={{ fontSize: 8, fontWeight: 800, color: C.pillLeftText, letterSpacing: 1 }}>FDA</span></div>
+        <div className="flex-1 flex items-center justify-center" style={{ background: C.pillRight }}><span style={{ fontSize: 8, fontWeight: 800, color: C.pillRightText, letterSpacing: 1 }}>✓</span></div>
       </motion.div>
       <motion.div className="absolute z-20 h-0.5 rounded-full" style={{ width: 56, background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.25), transparent)' }} animate={{ y: [-13, 13, -13] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }} />
       <motion.div className="absolute bottom-7 left-1/2 -translate-x-1/2" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
@@ -163,16 +235,17 @@ function FdaIllustration() {
 }
 
 function OrganicIllustration() {
+  const C = organicColors(useIsDark());
   const particles = [{ cx: 38, cy: 30 }, { cx: 62, cy: 24 }, { cx: 70, cy: 46 }];
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <div className="absolute w-28 h-28 rounded-full" style={{ background: 'linear-gradient(145deg, #f0f0f0, #d8d8d8)', boxShadow: '7px 7px 14px rgba(0,0,0,0.1), -5px -5px 12px rgba(255,255,255,0.92)' }} />
+      <div className="absolute w-28 h-28 rounded-full" style={{ background: `linear-gradient(145deg, ${C.discFrom}, ${C.discTo})`, boxShadow: '7px 7px 14px rgba(0,0,0,0.1), -5px -5px 12px rgba(255,255,255,0.92)' }} />
       <motion.svg className="relative z-10" width="56" height="56" viewBox="0 0 56 56" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
-        <motion.path d="M28 48 Q28 36 28 30" stroke="#555" strokeWidth="2" strokeLinecap="round" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2, duration: 0.4 }} />
-        <motion.path d="M28 30 Q14 16 20 8 Q36 4 40 18 Q44 30 28 30Z" fill="#555" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, type: 'spring', stiffness: 240, damping: 16 }} style={{ transformOrigin: '28px 30px' }} />
-        <motion.path d="M28 30 Q30 20 32 12" stroke="#e8e8e8" strokeWidth="1" strokeLinecap="round" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.7, duration: 0.4 }} />
+        <motion.path d="M28 48 Q28 36 28 30" stroke={C.stem} strokeWidth="2" strokeLinecap="round" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2, duration: 0.4 }} />
+        <motion.path d="M28 30 Q14 16 20 8 Q36 4 40 18 Q44 30 28 30Z" fill={C.leaf} initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, type: 'spring', stiffness: 240, damping: 16 }} style={{ transformOrigin: '28px 30px' }} />
+        <motion.path d="M28 30 Q30 20 32 12" stroke={C.vein} strokeWidth="1" strokeLinecap="round" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.7, duration: 0.4 }} />
         {particles.map((p, i) => (
-          <motion.circle key={i} cx={p.cx} cy={p.cy} r="2.5" fill="#aaa" initial={{ opacity: 0, y: 4 }} animate={{ opacity: [0, 0.7, 0], y: [4, -6, -14] }} transition={{ delay: 0.6 + i * 0.2, duration: 1.8, repeat: Infinity, ease: 'easeOut' }} />
+          <motion.circle key={i} cx={p.cx} cy={p.cy} r="2.5" fill={C.particles} initial={{ opacity: 0, y: 4 }} animate={{ opacity: [0, 0.7, 0], y: [4, -6, -14] }} transition={{ delay: 0.6 + i * 0.2, duration: 1.8, repeat: Infinity, ease: 'easeOut' }} />
         ))}
       </motion.svg>
       <motion.div className="absolute bottom-7 left-1/2 -translate-x-1/2" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}>
@@ -183,15 +256,16 @@ function OrganicIllustration() {
 }
 
 function BrcIllustration() {
+  const C = brcColors(useIsDark());
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <div className="absolute w-28 h-28 rounded-full" style={{ background: 'linear-gradient(145deg, #f0f0f0, #d8d8d8)', boxShadow: '7px 7px 14px rgba(0,0,0,0.1), -5px -5px 12px rgba(255,255,255,0.92)' }} />
+      <div className="absolute w-28 h-28 rounded-full" style={{ background: `linear-gradient(145deg, ${C.discFrom}, ${C.discTo})`, boxShadow: '7px 7px 14px rgba(0,0,0,0.1), -5px -5px 12px rgba(255,255,255,0.92)' }} />
       <motion.svg className="relative z-10" width="56" height="56" viewBox="0 0 56 56" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
-        <motion.circle cx="28" cy="28" r="18" stroke="#888" strokeWidth="1.5" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2, duration: 0.6 }} />
-        <motion.ellipse cx="28" cy="28" rx="9" ry="18" stroke="#aaa" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.4, duration: 0.5 }} />
-        <motion.line x1="10" y1="28" x2="46" y2="28" stroke="#aaa" strokeWidth="1" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.6, duration: 0.4 }} />
-        <motion.line x1="13" y1="20" x2="43" y2="20" stroke="#bbb" strokeWidth="1" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.7, duration: 0.3 }} />
-        <motion.line x1="13" y1="36" x2="43" y2="36" stroke="#bbb" strokeWidth="1" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.75, duration: 0.3 }} />
+        <motion.circle cx="28" cy="28" r="18" stroke={C.outerRing} strokeWidth="1.5" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2, duration: 0.6 }} />
+        <motion.ellipse cx="28" cy="28" rx="9" ry="18" stroke={C.ellipse} strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.4, duration: 0.5 }} />
+        <motion.line x1="10" y1="28" x2="46" y2="28" stroke={C.latitudeLine} strokeWidth="1" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.6, duration: 0.4 }} />
+        <motion.line x1="13" y1="20" x2="43" y2="20" stroke={C.latitudeFaint} strokeWidth="1" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.7, duration: 0.3 }} />
+        <motion.line x1="13" y1="36" x2="43" y2="36" stroke={C.latitudeFaint} strokeWidth="1" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.75, duration: 0.3 }} />
       </motion.svg>
       <motion.div className="absolute bottom-7 left-1/2 -translate-x-1/2" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}>
         <CertBadge>BRC</CertBadge>
@@ -212,6 +286,7 @@ const illustrations = [
 export default function CertificationsPage() {
   const t = useTranslations('certifications');
   const locale = useLocale();
+  const PC = pageColors(useIsDark());
   const [selectedCert, setSelectedCert] = useState<typeof certifications[0] | null>(null);
 
   const formatDate = (dateString: string) => {
@@ -222,26 +297,26 @@ export default function CertificationsPage() {
   return (
     <>
       {/* Header */}
-      <section className="py-20 bg-white min-h-screen px-4 max-w-6xl mx-auto">
+      <section className="py-20  min-h-screen px-4 max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
             <div
-              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5]"
+              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] dark:bg-[#1e1e1e]"
               style={{
-                borderTop: '1px solid rgba(255,255,255,0.8)',
-                boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+                borderTop: 'var(--card-border-top)',
+                boxShadow: 'var(--card-shadow)',
               }}
             >
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2Z" fill="currentColor" className="text-gray-900" />
+                  <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2Z" fill="currentColor" className="text-gray-900 dark:text-gray-100" />
                 </svg>
                 {t('hero.badge')}
               </span>
             </div>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('hero.title')}</h1>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">{t('hero.subtitle')}</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">{t('hero.title')}</h1>
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t('hero.subtitle')}</p>
         </div>
 
         {/* Cards grid */}
@@ -275,39 +350,39 @@ export default function CertificationsPage() {
               exit={{ scale: 0.9, opacity: 0 }}
               className="rounded-3xl p-8 max-w-lg w-full"
               style={{
-                background: '#f5f5f5',
-                borderTop: '1px solid rgba(255,255,255,0.8)',
-                boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+                background: 'var(--card-bg)',
+                borderTop: 'var(--card-border-top)',
+                boxShadow: 'var(--card-shadow)',
               }}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between mb-6">
                 <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                  style={{ background: '#ebebeb', boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)' }}
+                  style={{ background: 'var(--neuo-badge-bg)', boxShadow: 'var(--neuo-badge-shadow)' }}
                 >
-                  <Shield className="w-8 h-8 text-gray-700" />
+                  <Shield className="w-8 h-8" style={{ color: PC.modalIcon }} />
                 </div>
-                <button onClick={() => setSelectedCert(null)} className="p-2 hover:bg-white/60 rounded-lg transition">
-                  <X className="w-5 h-5 text-gray-500" />
+                <button onClick={() => setSelectedCert(null)} className="p-2 hover:bg-white/60 dark:hover:bg-gray-800/60 rounded-lg transition">
+                  <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                 </button>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 {locale === 'ar' ? selectedCert.name_ar : selectedCert.name_en}
               </h2>
-              <p className="text-gray-600 font-medium mb-4 flex items-center gap-2">
+              <p className="text-gray-600 dark:text-gray-400 font-medium mb-4 flex items-center gap-2">
                 <Building2 className="w-4 h-4" />
                 {locale === 'ar' ? selectedCert.issuing_body_ar : selectedCert.issuing_body_en}
               </p>
-              <p className="text-gray-500 mb-6">
+              <p className="text-gray-500 dark:text-gray-400 mb-6">
                 {locale === 'ar' ? selectedCert.description_ar : selectedCert.description_en}
               </p>
-              <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                <div className="flex items-center gap-2 text-sm text-gray-500">
+              <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                   <Calendar className="w-4 h-4" />
                   <span>{t('validUntil')}: {formatDate(selectedCert.valid_until)}</span>
                 </div>
-                <div className="flex items-center text-gray-700 text-sm font-medium">
+                <div className="flex items-center text-sm font-medium" style={{ color: PC.modalVerified }}>
                   <CheckCircle className="w-4 h-4 me-1" />
                   {t('verified')}
                 </div>

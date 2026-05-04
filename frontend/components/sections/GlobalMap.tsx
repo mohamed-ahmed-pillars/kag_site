@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import createGlobe, { COBEOptions } from 'cobe';
 import { cn } from '@/lib/utils';
 import { FlowButton } from '@/components/ui/flow-button';
 
 /* ── Globe config — KAG export destinations ── */
-const GLOBE_CONFIG: COBEOptions = {
+const GLOBE_CONFIG_LIGHT: COBEOptions = {
   width: 800,
   height: 800,
   devicePixelRatio: 2,
@@ -19,7 +20,7 @@ const GLOBE_CONFIG: COBEOptions = {
   mapSamples: 16000,
   mapBrightness: 1.2,
   baseColor: [1, 1, 1],
-  markerColor: [0.1, 0.1, 0.1],
+  markerColor: [0.208, 0.298, 0.604],   // #354c9a brand navy
   glowColor: [0.95, 0.95, 0.95],
   markers: [
     { location: [30.0444, 31.2357], size: 0.08 },  // Cairo
@@ -38,9 +39,17 @@ const GLOBE_CONFIG: COBEOptions = {
   ],
 };
 
+const GLOBE_CONFIG_DARK: COBEOptions = {
+  ...GLOBE_CONFIG_LIGHT,
+  dark: 1,
+  baseColor: [0.55, 0.55, 0.55],
+  markerColor: [0.9, 0.9, 0.9],         // neutral in dark mode
+  glowColor: [0.4, 0.4, 0.4],
+};
+
 function Globe({
   className,
-  config = GLOBE_CONFIG,
+  config = GLOBE_CONFIG_LIGHT,
 }: {
   className?: string;
   config?: COBEOptions;
@@ -138,16 +147,18 @@ const stats = [
 export default function GlobalMap() {
   const t = useTranslations('home.globalReach');
   const locale = useLocale();
+  const { resolvedTheme } = useTheme();
+  const globeConfig = resolvedTheme === 'dark' ? GLOBE_CONFIG_DARK : GLOBE_CONFIG_LIGHT;
 
   return (
     <section className="py-16 px-4 max-w-7xl mx-auto">
       {/* FeatureCard-style wrapper */}
       <div
-        className="relative w-full rounded-3xl bg-[#f5f5f5] overflow-visible p-8 md:p-12"
+        className="relative w-full rounded-3xl overflow-visible p-5 sm:p-8 md:p-12"
         style={{
-          borderTop: '1px solid rgba(255,255,255,0.8)',
-          boxShadow:
-            '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+          backgroundColor: 'var(--card-bg)',
+          borderTop: 'var(--card-border-top)',
+          boxShadow: 'var(--card-shadow)',
         }}
       >
         <div className="flex flex-col-reverse items-center justify-between gap-10 md:flex-row">
@@ -155,29 +166,29 @@ export default function GlobalMap() {
           {/* ── Left: text + stats + CTA ── */}
           <div className="z-10 max-w-xl text-left">
             {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 mb-6 text-xs font-bold tracking-widest uppercase text-gray-600"
+            <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 mb-6 text-xs font-bold tracking-widest uppercase text-gray-600 dark:text-gray-300"
               style={{
-                background: '#ebebeb',
-                boxShadow: '3px 3px 6px rgba(0,0,0,0.08), -2px -2px 5px rgba(255,255,255,0.9)',
+                background: 'var(--neuo-surface)',
+                boxShadow: 'var(--neuo-badge-shadow)',
               }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-gray-400" />
               {t('badge') || 'Global Reach'}
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 leading-tight mb-4">
               {t('title')}
             </h2>
-            <p className="text-gray-500 text-lg leading-relaxed mb-8">
+            <p className="text-gray-500 dark:text-gray-400 text-lg leading-relaxed mb-8">
               {t('subtitle')}
             </p>
 
             {/* Stats row */}
-            <div className="flex gap-8 mb-10">
+            <div className="flex gap-5 sm:gap-8 mb-8 md:mb-10">
               {stats.map((s) => (
                 <div key={s.key}>
-                  <div className="text-3xl font-bold text-gray-900">{s.value}</div>
-                  <div className="text-sm text-gray-500 mt-0.5">{t(s.key)}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">{s.value}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{t(s.key)}</div>
                 </div>
               ))}
             </div>
@@ -189,18 +200,18 @@ export default function GlobalMap() {
 
           {/* ── Right: globe ── */}
           <div className="relative h-[320px] w-full max-w-lg md:h-[480px]">
-            <Globe className="absolute top-1/2 -translate-y-1/2 -right-16 scale-125 md:scale-150" />
+            <Globe className="absolute top-1/2 -translate-y-1/2 -right-16 scale-125 md:scale-150" config={globeConfig} key={resolvedTheme} />
           </div>
         </div>
 
         {/* 3D shadow layers — same as FeatureCard */}
         <div
-          className="absolute inset-0 rounded-3xl bg-gray-400/20 -z-10"
-          style={{ transform: 'translateZ(-20px) translateY(8px) translateX(4px)', filter: 'blur(12px)' }}
+          className="absolute inset-0 rounded-3xl bg-gray-400/15 -z-10"
+          style={{ transform: 'translateZ(-20px) translateY(6px) translateX(3px)', filter: 'blur(8px)' }}
         />
         <div
-          className="absolute inset-0 rounded-3xl bg-gray-300/15 -z-20"
-          style={{ transform: 'translateZ(-40px) translateY(15px) translateX(8px)', filter: 'blur(20px)' }}
+          className="absolute inset-0 rounded-3xl bg-gray-300/10 -z-20"
+          style={{ transform: 'translateZ(-40px) translateY(10px) translateX(5px)', filter: 'blur(14px)' }}
         />
       </div>
     </section>

@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { Footer, WhatsAppButton, ScrollToTop } from '@/components/layout';
+import { Footer } from '@/components/layout';
 import SmoothScroll from '@/components/layout/SmoothScroll';
 import { ScrollToHash } from '@/components/ui/scroll-to-hash';
 import '../globals.css';
@@ -55,8 +55,7 @@ export default async function LocaleLayout({
               <Header />
               <main className="relative z-10 -mt-14 md:-mt-16 rounded-b-[3.5rem] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.15)]">{children}</main>
               <Footer />
-              <WhatsAppButton />
-              <ScrollToTop />
+
               <ScrollToHash />
             </SmoothScroll>
           </NextIntlClientProvider>

@@ -66,24 +66,24 @@ const shippingMethods = [
 ];
 
 const neuCard = {
-  borderTop: '1px solid rgba(255,255,255,0.8)',
-  boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+  borderTop: 'var(--card-border-top)',
+  boxShadow: 'var(--card-shadow)',
 };
 
 const neuInput: React.CSSProperties = {
-  boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.08), inset -2px -2px 4px rgba(255,255,255,0.9)',
+  boxShadow: 'var(--neuo-badge-shadow)',
 };
 
 const neuButton: React.CSSProperties = {
-  background: '#f5f5f5',
-  borderTop: '1px solid rgba(255,255,255,0.8)',
-  boxShadow: '0 8px 16px -4px rgba(0,0,0,0.25), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.9)',
+  background: 'var(--card-bg)',
+  borderTop: 'var(--card-border-top)',
+  boxShadow: 'var(--card-shadow)',
 };
 
 const neuItemCard: React.CSSProperties = {
-  background: '#f5f5f5',
-  borderTop: '1px solid rgba(255,255,255,0.8)',
-  boxShadow: '0 4px 10px -2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5), 3px 3px 6px rgba(0,0,0,0.1), -3px -3px 6px rgba(255,255,255,0.9)',
+  background: 'var(--card-bg)',
+  borderTop: 'var(--card-border-top)',
+  boxShadow: 'var(--card-shadow)',
 };
 
 export default function QuotationPage() {
@@ -158,28 +158,28 @@ export default function QuotationPage() {
 
   if (isSuccess) {
     return (
-      <section className="min-h-screen py-20 bg-white">
+      <section className="min-h-screen py-20 bg-white dark:bg-[#0f0f0f]">
         <Container>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="max-w-2xl mx-auto text-center"
           >
-            <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8" style={{ background: '#ebebeb', boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)' }}>
-              <CheckCircle className="w-12 h-12 text-gray-600" />
+            <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8" style={{ background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }}>
+              <CheckCircle className="w-12 h-12 text-gray-600 dark:text-gray-400 dark:text-gray-400" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               {t('success.title')}
             </h1>
-            <p className="text-xl text-gray-500 mb-8">
+            <p className="text-xl text-gray-500 dark:text-gray-400 dark:text-gray-400 mb-8">
               {t('success.message')}
             </p>
-            <p className="text-gray-500 mb-8">
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-400 mb-8">
               {t('success.reference')}: <span className="font-mono font-bold">{`RFQ-${Date.now().toString(36).toUpperCase()}`}</span>
             </p>
             <a
               href={`/${locale}`}
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-gray-900 transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-gray-900 dark:text-gray-100 transition-all hover:scale-105"
               style={neuButton}
             >
               {t('success.backHome')}
@@ -193,7 +193,7 @@ export default function QuotationPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-[#0f0f0f]">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -201,17 +201,17 @@ export default function QuotationPage() {
             className="text-center max-w-3xl mx-auto"
           >
             <div className="flex justify-center mb-6">
-              <div className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5]" style={neuCard}>
-                <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900">
+              <div className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] dark:bg-[#1e1e1e]" style={neuCard}>
+                <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
                   <ClipboardList className="w-4 h-4" />
                   {t('hero.badge')}
                 </span>
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
               {t('hero.title')}
             </h1>
-            <p className="text-xl text-gray-500">
+            <p className="text-xl text-gray-500 dark:text-gray-400 dark:text-gray-400">
               {t('hero.subtitle')}
             </p>
           </motion.div>
@@ -219,7 +219,7 @@ export default function QuotationPage() {
       </section>
 
       {/* Form Section */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white dark:bg-[#0f0f0f]">
         <Container>
           {/* Progress Steps */}
           <div className="max-w-4xl mx-auto mb-12">
@@ -230,10 +230,10 @@ export default function QuotationPage() {
                 const isCompleted = currentStep > step.id;
 
                 const stepStyle: React.CSSProperties = isActive
-                  ? { background: '#e0e0e0', boxShadow: 'inset 3px 3px 7px rgba(0,0,0,0.12), inset -3px -3px 7px rgba(255,255,255,0.9)' }
+                  ? { background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }
                   : isCompleted
-                  ? { background: '#ebebeb', boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)' }
-                  : { background: '#f5f5f5', boxShadow: '3px 3px 6px rgba(0,0,0,0.06), -2px -2px 4px rgba(255,255,255,0.9)' };
+                  ? { background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }
+                  : { background: 'var(--card-bg)', boxShadow: 'var(--card-shadow)' };
 
                 return (
                   <div key={step.id} className="flex items-center flex-1">
@@ -243,14 +243,14 @@ export default function QuotationPage() {
                         style={stepStyle}
                       >
                         {isCompleted ? (
-                          <CheckCircle className="w-6 h-6 text-gray-600" />
+                          <CheckCircle className="w-6 h-6 text-gray-600 dark:text-gray-400 dark:text-gray-400" />
                         ) : (
-                          <Icon className="w-6 h-6 text-gray-600" />
+                          <Icon className="w-6 h-6 text-gray-600 dark:text-gray-400 dark:text-gray-400" />
                         )}
                       </div>
                       <span
                         className={`mt-2 text-sm font-medium ${
-                          isActive ? 'text-gray-900' : 'text-gray-500'
+                          isActive ? 'text-gray-900 dark:text-gray-100' : 'text-gray-500 dark:text-gray-400 dark:text-gray-400'
                         }`}
                       >
                         {t(`steps.${step.key}`)}
@@ -259,7 +259,7 @@ export default function QuotationPage() {
                     {index < steps.length - 1 && (
                       <div
                         className={`flex-1 h-1 mx-4 rounded ${
-                          currentStep > step.id ? 'bg-[#d0d0d0]' : 'bg-[#e8e8e8]'
+                          currentStep > step.id ? 'bg-[#d0d0d0] dark:bg-gray-600' : 'bg-[#e8e8e8] dark:bg-gray-800'
                         }`}
                       />
                     )}
@@ -271,7 +271,7 @@ export default function QuotationPage() {
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="max-w-4xl mx-auto">
-            <div className="rounded-3xl p-8 bg-[#f5f5f5]" style={neuCard}>
+            <div className="rounded-3xl p-8 bg-[#f5f5f5] dark:bg-[#1e1e1e]" style={neuCard}>
               <AnimatePresence mode="wait">
                 {/* Step 1: Company Info */}
                 {currentStep === 1 && (
@@ -281,18 +281,18 @@ export default function QuotationPage() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                   >
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
                       {t('form.companyInfo.title')}
                     </h2>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                           <Building2 className="w-4 h-4 inline me-2" />
                           {t('form.companyInfo.companyName')} *
                         </label>
                         <input
                           {...register('companyName')}
-                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none ${errors.companyName ? 'ring-1 ring-red-400' : ''}`}
+                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none ${errors.companyName ? 'ring-1 ring-red-400' : ''}`}
                           style={neuInput}
                           placeholder={t('form.companyInfo.companyNamePlaceholder')}
                         />
@@ -301,13 +301,13 @@ export default function QuotationPage() {
                         )}
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                           <User className="w-4 h-4 inline me-2" />
                           {t('form.companyInfo.contactName')} *
                         </label>
                         <input
                           {...register('contactName')}
-                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none ${errors.contactName ? 'ring-1 ring-red-400' : ''}`}
+                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none ${errors.contactName ? 'ring-1 ring-red-400' : ''}`}
                           style={neuInput}
                           placeholder={t('form.companyInfo.contactNamePlaceholder')}
                         />
@@ -316,14 +316,14 @@ export default function QuotationPage() {
                         )}
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                           <Mail className="w-4 h-4 inline me-2" />
                           {t('form.companyInfo.email')} *
                         </label>
                         <input
                           {...register('email')}
                           type="email"
-                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none ${errors.email ? 'ring-1 ring-red-400' : ''}`}
+                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none ${errors.email ? 'ring-1 ring-red-400' : ''}`}
                           style={neuInput}
                           placeholder={t('form.companyInfo.emailPlaceholder')}
                         />
@@ -332,14 +332,14 @@ export default function QuotationPage() {
                         )}
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                           <Phone className="w-4 h-4 inline me-2" />
                           {t('form.companyInfo.phone')} *
                         </label>
                         <input
                           {...register('phone')}
                           type="tel"
-                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none ${errors.phone ? 'ring-1 ring-red-400' : ''}`}
+                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none ${errors.phone ? 'ring-1 ring-red-400' : ''}`}
                           style={neuInput}
                           placeholder={t('form.companyInfo.phonePlaceholder')}
                         />
@@ -348,13 +348,13 @@ export default function QuotationPage() {
                         )}
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                           <Globe className="w-4 h-4 inline me-2" />
                           {t('form.companyInfo.country')} *
                         </label>
                         <input
                           {...register('country')}
-                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none ${errors.country ? 'ring-1 ring-red-400' : ''}`}
+                          className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none ${errors.country ? 'ring-1 ring-red-400' : ''}`}
                           style={neuInput}
                           placeholder={t('form.companyInfo.countryPlaceholder')}
                         />
@@ -363,13 +363,13 @@ export default function QuotationPage() {
                         )}
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                           <MapPin className="w-4 h-4 inline me-2" />
                           {t('form.companyInfo.address')}
                         </label>
                         <input
                           {...register('address')}
-                          className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none"
+                          className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none"
                           style={neuInput}
                           placeholder={t('form.companyInfo.addressPlaceholder')}
                         />
@@ -386,7 +386,7 @@ export default function QuotationPage() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                   >
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
                       {t('form.products.title')}
                     </h2>
                     <div className="space-y-6">
@@ -412,12 +412,12 @@ export default function QuotationPage() {
                           </div>
                           <div className="grid md:grid-cols-2 gap-4">
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                                 {t('form.products.selectProduct')} *
                               </label>
                               <select
                                 {...register(`products.${index}.productId`)}
-                                className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 focus:outline-none ${errors.products?.[index]?.productId ? 'ring-1 ring-red-400' : ''}`}
+                                className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 focus:outline-none ${errors.products?.[index]?.productId ? 'ring-1 ring-red-400' : ''}`}
                                 style={neuInput}
                               >
                                 <option value="">{t('form.products.selectProductPlaceholder')}</option>
@@ -429,23 +429,23 @@ export default function QuotationPage() {
                               </select>
                             </div>
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                                 {t('form.products.quantity')} *
                               </label>
                               <input
                                 {...register(`products.${index}.quantity`)}
-                                className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none ${errors.products?.[index]?.quantity ? 'ring-1 ring-red-400' : ''}`}
+                                className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none ${errors.products?.[index]?.quantity ? 'ring-1 ring-red-400' : ''}`}
                                 style={neuInput}
                                 placeholder={t('form.products.quantityPlaceholder')}
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                                 {t('form.products.packaging')}
                               </label>
                               <select
                                 {...register(`products.${index}.packagingPreference`)}
-                                className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 focus:outline-none"
+                                className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 focus:outline-none"
                                 style={neuInput}
                               >
                                 <option value="">{t('form.products.packagingPlaceholder')}</option>
@@ -455,12 +455,12 @@ export default function QuotationPage() {
                               </select>
                             </div>
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                                 {t('form.products.notes')}
                               </label>
                               <input
                                 {...register(`products.${index}.notes`)}
-                                className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none"
+                                className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none"
                                 style={neuInput}
                                 placeholder={t('form.products.notesPlaceholder')}
                               />
@@ -471,8 +471,8 @@ export default function QuotationPage() {
                       <button
                         type="button"
                         onClick={() => append({ productId: '', quantity: '', packagingPreference: '', notes: '' })}
-                        className="w-full py-4 rounded-xl text-gray-600 transition flex items-center justify-center gap-2 font-medium hover:scale-[1.01]"
-                        style={{ background: '#ebebeb', boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.07), inset -2px -2px 4px rgba(255,255,255,0.9)' }}
+                        className="w-full py-4 rounded-xl text-gray-600 dark:text-gray-400 dark:text-gray-400 transition flex items-center justify-center gap-2 font-medium hover:scale-[1.01]"
+                        style={{ background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }}
                       >
                         <Plus className="w-5 h-5" />
                         {t('form.products.addProduct')}
@@ -489,12 +489,12 @@ export default function QuotationPage() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                   >
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
                       {t('form.shipping.title')}
                     </h2>
                     <div className="space-y-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-3">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3">
                           {t('form.shipping.method')} *
                         </label>
                         <div className="grid md:grid-cols-2 gap-4">
@@ -505,8 +505,8 @@ export default function QuotationPage() {
                                 key={method.value}
                                 className="flex items-center p-4 rounded-xl cursor-pointer transition"
                                 style={isSelected
-                                  ? { background: '#e0e0e0', boxShadow: 'inset 3px 3px 7px rgba(0,0,0,0.12), inset -3px -3px 7px rgba(255,255,255,0.9)' }
-                                  : { background: '#f5f5f5', boxShadow: '3px 3px 6px rgba(0,0,0,0.06), -2px -2px 4px rgba(255,255,255,0.9)' }
+                                   ? { background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }
+                                   : { background: 'var(--card-bg)', boxShadow: 'var(--card-shadow)' }
                                 }
                               >
                                 <input
@@ -518,15 +518,15 @@ export default function QuotationPage() {
                                 <div
                                   className="w-5 h-5 rounded-full me-3 flex items-center justify-center"
                                   style={isSelected
-                                    ? { background: '#d0d0d0', boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.15), inset -2px -2px 3px rgba(255,255,255,0.9)' }
-                                    : { background: '#ebebeb', boxShadow: '2px 2px 4px rgba(0,0,0,0.08), -2px -2px 3px rgba(255,255,255,0.9)' }
+                                     ? { background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }
+                                     : { background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }
                                   }
                                 >
                                   {isSelected && (
-                                    <div className="w-2.5 h-2.5 rounded-full bg-gray-500" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-gray-500 dark:bg-gray-400" />
                                   )}
                                 </div>
-                                <span className="font-medium text-gray-700">{method.label}</span>
+                                <span className="font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300">{method.label}</span>
                               </label>
                             );
                           })}
@@ -534,12 +534,12 @@ export default function QuotationPage() {
                       </div>
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                             {t('form.shipping.destination')} *
                           </label>
                           <input
                             {...register('destinationPort')}
-                            className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none ${errors.destinationPort ? 'ring-1 ring-red-400' : ''}`}
+                            className={`w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none ${errors.destinationPort ? 'ring-1 ring-red-400' : ''}`}
                             style={neuInput}
                             placeholder={t('form.shipping.destinationPlaceholder')}
                           />
@@ -548,25 +548,25 @@ export default function QuotationPage() {
                           )}
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                             {t('form.shipping.estimatedDate')}
                           </label>
                           <input
                             {...register('estimatedDate')}
                             type="date"
-                            className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 focus:outline-none"
+                            className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 focus:outline-none"
                             style={neuInput}
                           />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
                           {t('form.shipping.specialRequirements')}
                         </label>
                         <textarea
                           {...register('specialRequirements')}
                           rows={4}
-                          className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 text-gray-900 placeholder-gray-400 focus:outline-none resize-none"
+                          className="w-full px-4 py-3 rounded-xl border-0 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none resize-none"
                           style={neuInput}
                           placeholder={t('form.shipping.specialRequirementsPlaceholder')}
                         />
@@ -583,41 +583,41 @@ export default function QuotationPage() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                   >
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
                       {t('form.review.title')}
                     </h2>
                     <div className="space-y-6">
                       {/* Company Info Summary */}
                       <div className="p-6 rounded-2xl" style={neuItemCard}>
-                        <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                          <Building2 className="w-5 h-5 text-gray-600" />
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                          <Building2 className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                           {t('form.companyInfo.title')}
                         </h3>
                         <dl className="grid md:grid-cols-2 gap-4 text-sm">
                           <div>
-                            <dt className="text-gray-500">{t('form.companyInfo.companyName')}</dt>
-                            <dd className="font-medium text-gray-900">{formData.companyName}</dd>
+                            <dt className="text-gray-500 dark:text-gray-400">{t('form.companyInfo.companyName')}</dt>
+                            <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.companyName}</dd>
                           </div>
                           <div>
-                            <dt className="text-gray-500">{t('form.companyInfo.contactName')}</dt>
-                            <dd className="font-medium text-gray-900">{formData.contactName}</dd>
+                            <dt className="text-gray-500 dark:text-gray-400">{t('form.companyInfo.contactName')}</dt>
+                            <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.contactName}</dd>
                           </div>
                           <div>
-                            <dt className="text-gray-500">{t('form.companyInfo.email')}</dt>
-                            <dd className="font-medium text-gray-900">{formData.email}</dd>
+                            <dt className="text-gray-500 dark:text-gray-400">{t('form.companyInfo.email')}</dt>
+                            <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.email}</dd>
                           </div>
                           <div>
-                            <dt className="text-gray-500">{t('form.companyInfo.phone')}</dt>
-                            <dd className="font-medium text-gray-900">{formData.phone}</dd>
+                            <dt className="text-gray-500 dark:text-gray-400">{t('form.companyInfo.phone')}</dt>
+                            <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.phone}</dd>
                           </div>
                           <div>
-                            <dt className="text-gray-500">{t('form.companyInfo.country')}</dt>
-                            <dd className="font-medium text-gray-900">{formData.country}</dd>
+                            <dt className="text-gray-500 dark:text-gray-400">{t('form.companyInfo.country')}</dt>
+                            <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.country}</dd>
                           </div>
                           {formData.address && (
                             <div>
-                              <dt className="text-gray-500">{t('form.companyInfo.address')}</dt>
-                              <dd className="font-medium text-gray-900">{formData.address}</dd>
+                              <dt className="text-gray-500 dark:text-gray-400">{t('form.companyInfo.address')}</dt>
+                              <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.address}</dd>
                             </div>
                           )}
                         </dl>
@@ -625,15 +625,15 @@ export default function QuotationPage() {
 
                       {/* Products Summary */}
                       <div className="p-6 rounded-2xl" style={neuItemCard}>
-                        <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                          <Package className="w-5 h-5 text-gray-600" />
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                          <Package className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                           {t('form.products.title')}
                         </h3>
                         <div className="space-y-3">
                           {formData.products?.map((product, index) => (
-                            <div key={index} className="flex justify-between items-center py-2 border-b border-gray-200/60 last:border-0">
-                              <span className="font-medium text-gray-900">{getProductName(product.productId)}</span>
-                              <span className="text-gray-500">{product.quantity}</span>
+                            <div key={index} className="flex justify-between items-center py-2 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
+                              <span className="font-medium text-gray-900 dark:text-gray-100">{getProductName(product.productId)}</span>
+                              <span className="text-gray-500 dark:text-gray-400">{product.quantity}</span>
                             </div>
                           ))}
                         </div>
@@ -641,31 +641,31 @@ export default function QuotationPage() {
 
                       {/* Shipping Summary */}
                       <div className="p-6 rounded-2xl" style={neuItemCard}>
-                        <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                          <Truck className="w-5 h-5 text-gray-600" />
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                          <Truck className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                           {t('form.shipping.title')}
                         </h3>
                         <dl className="grid md:grid-cols-2 gap-4 text-sm">
                           <div>
-                            <dt className="text-gray-500">{t('form.shipping.method')}</dt>
-                            <dd className="font-medium text-gray-900">
+                            <dt className="text-gray-500 dark:text-gray-400">{t('form.shipping.method')}</dt>
+                            <dd className="font-medium text-gray-900 dark:text-gray-100">
                               {shippingMethods.find(m => m.value === formData.shippingMethod)?.label}
                             </dd>
                           </div>
                           <div>
-                            <dt className="text-gray-500">{t('form.shipping.destination')}</dt>
-                            <dd className="font-medium text-gray-900">{formData.destinationPort}</dd>
+                            <dt className="text-gray-500 dark:text-gray-400">{t('form.shipping.destination')}</dt>
+                            <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.destinationPort}</dd>
                           </div>
                           {formData.estimatedDate && (
                             <div>
-                              <dt className="text-gray-500">{t('form.shipping.estimatedDate')}</dt>
-                              <dd className="font-medium text-gray-900">{formData.estimatedDate}</dd>
+                              <dt className="text-gray-500 dark:text-gray-400">{t('form.shipping.estimatedDate')}</dt>
+                              <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.estimatedDate}</dd>
                             </div>
                           )}
                           {formData.specialRequirements && (
                             <div className="md:col-span-2">
-                              <dt className="text-gray-500">{t('form.shipping.specialRequirements')}</dt>
-                              <dd className="font-medium text-gray-900">{formData.specialRequirements}</dd>
+                              <dt className="text-gray-500 dark:text-gray-400">{t('form.shipping.specialRequirements')}</dt>
+                              <dd className="font-medium text-gray-900 dark:text-gray-100">{formData.specialRequirements}</dd>
                             </div>
                           )}
                         </dl>
@@ -676,12 +676,12 @@ export default function QuotationPage() {
               </AnimatePresence>
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between mt-8 pt-6 border-t border-gray-200/60">
+              <div className="flex justify-between mt-8 pt-6 border-t border-gray-200/60 dark:border-gray-700/60">
                 <button
                   type="button"
                   onClick={prevStep}
                   disabled={currentStep === 1}
-                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-gray-700 transition-all hover:scale-105 disabled:opacity-40 ${currentStep === 1 ? 'invisible' : ''}`}
+                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-gray-700 dark:text-gray-300 transition-all hover:scale-105 disabled:opacity-40 ${currentStep === 1 ? 'invisible' : ''}`}
                   style={neuButton}
                 >
                   <ChevronLeft className="w-5 h-5" />
@@ -691,7 +691,7 @@ export default function QuotationPage() {
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-gray-700 transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-gray-700 dark:text-gray-300 transition-all hover:scale-105"
                     style={neuButton}
                   >
                     {t('form.next')}
@@ -701,12 +701,12 @@ export default function QuotationPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-gray-700 transition-all hover:scale-105 disabled:opacity-60"
+                    className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-gray-700 dark:text-gray-300 transition-all hover:scale-105 disabled:opacity-60"
                     style={neuButton}
                   >
                     {isSubmitting ? (
                       <>
-                        <span className="w-4 h-4 border-2 border-gray-400/30 border-t-gray-600 rounded-full animate-spin" />
+                        <span className="w-4 h-4 border-2 border-gray-400/30 dark:border-gray-600/30 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
                         {t('form.submitting')}
                       </>
                     ) : (

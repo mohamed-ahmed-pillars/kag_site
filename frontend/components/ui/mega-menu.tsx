@@ -201,7 +201,7 @@ const MegaMenu = React.forwardRef<HTMLUListElement, MegaMenuProps>(
                                             {item.label}
                                           </span>
                                           {item.badge && (
-                                            <span className="px-2 py-0.5 text-xs font-medium text-white bg-red-500 rounded-full">
+                                            <span className="px-2 py-0.5 text-xs font-medium text-white rounded-full" style={{ background: '#354c9a' }}>
                                               {item.badge}
                                             </span>
                                           )}

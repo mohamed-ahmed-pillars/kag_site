@@ -1,9 +1,31 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
+import { useTheme } from 'next-themes';
 import { Building2, Award, Users, TrendingUp } from 'lucide-react';
 import { Container } from '@/components/ui';
+
+function useIsDark() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return false;
+  return resolvedTheme === 'dark';
+}
+
+// ── CompanyStory colors — edit here to test ───────────────────────
+const storyColors = (isDark: boolean) => ({
+  placeholderIcon: isDark ? '#6b7280' : '#354c9a',   // large Building2 placeholder
+  statValue:       isDark ? '#f3f4f6' : '#354c9a',   // "25+" floating badge
+  statLabel:       isDark ? '#9ca3af' : '#6b7280',   // years label
+  heading:         isDark ? '#f3f4f6' : '#111827',   // section h2
+  highlightIcon:   isDark ? '#9ca3af' : '#354c9a',   // highlight grid icons
+  highlightValue:  isDark ? '#f3f4f6' : '#354c9a',   // highlight values
+  highlightLabel:  isDark ? '#9ca3af' : '#6b7280',   // highlight labels
+});
+// ─────────────────────────────────────────────────────────────────
 
 const highlights = [
   { icon: Building2, key: 'founded' },
@@ -15,19 +37,20 @@ const highlights = [
 export default function CompanyStory() {
   const t = useTranslations('about.story');
   const locale = useLocale();
+  const C = storyColors(useIsDark());
 
   const neuDisc = {
-    background: '#ebebeb',
-    boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)',
+    background: 'var(--neuo-surface)',
+    boxShadow: 'var(--neuo-badge-shadow)',
   };
 
   const neuCard = {
-    borderTop: '1px solid rgba(255,255,255,0.8)',
-    boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+    borderTop: 'var(--card-border-top)',
+    boxShadow: 'var(--card-shadow)',
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-[#0f0f0f]">
       <Container>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Image Side */}
@@ -39,12 +62,12 @@ export default function CompanyStory() {
           >
             <div
               className="aspect-[4/3] rounded-2xl overflow-hidden"
-              style={{ background: 'linear-gradient(145deg, #eeeeee, #d8d8d8)', boxShadow: 'inset 4px 4px 10px rgba(0,0,0,0.08), inset -4px -4px 10px rgba(255,255,255,0.9)' }}
+              style={{ background: 'var(--neuo-surface)', boxShadow: 'var(--neuo-badge-shadow)' }}
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center p-8">
-                  <Building2 className="w-24 h-24 mx-auto mb-4 text-gray-400" />
-                  <p className="text-gray-500">{t('imagePlaceholder')}</p>
+                  <Building2 className="w-24 h-24 mx-auto mb-4" style={{ color: C.placeholderIcon }} />
+                  <p className="text-gray-500 dark:text-gray-400">{t('imagePlaceholder')}</p>
                 </div>
               </div>
             </div>
@@ -52,13 +75,13 @@ export default function CompanyStory() {
             {/* Floating Badge */}
             <motion.div
               className="absolute -bottom-6 -right-6 rounded-xl p-6"
-              style={{ background: '#f5f5f5', borderTop: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 8px 16px -4px rgba(0,0,0,0.2), 4px 4px 8px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.9)' }}
+              style={{ background: 'var(--card-bg)', borderTop: 'var(--card-border-top)', boxShadow: 'var(--card-shadow)' }}
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
               <div className="text-center">
-                <div className="text-4xl font-bold text-gray-900">25+</div>
-                <div className="text-sm text-gray-500">{t('yearsLabel')}</div>
+                <div className="text-4xl font-bold" style={{ color: C.statValue }}>25+</div>
+                <div className="text-sm" style={{ color: C.statLabel }}>{t('yearsLabel')}</div>
               </div>
             </motion.div>
           </motion.div>
@@ -69,13 +92,13 @@ export default function CompanyStory() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] mb-4" style={neuCard}>
-              <span className="text-sm font-semibold text-gray-900">{t('badge')}</span>
+            <div className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] dark:bg-[#1e1e1e] mb-4" style={neuCard}>
+              <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{t('badge')}</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: C.heading }}>
               {t('title')}
             </h2>
-            <div className="space-y-4 text-gray-600">
+            <div className="space-y-4 text-gray-600 dark:text-gray-400">
               <p>{t('paragraph1')}</p>
               <p>{t('paragraph2')}</p>
             </div>
@@ -95,13 +118,13 @@ export default function CompanyStory() {
                     style={neuCard}
                   >
                     <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={neuDisc}>
-                      <Icon className="w-6 h-6 text-gray-600" />
+                    <Icon className="w-6 h-6" style={{ color: C.highlightIcon }} />
+                  </div>
+                  <div>
+                    <div className="font-semibold" style={{ color: C.highlightValue }}>
+                      {t(`highlights.${item.key}.value`)}
                     </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        {t(`highlights.${item.key}.value`)}
-                      </div>
-                      <div className="text-sm text-gray-500">
+                    <div className="text-sm" style={{ color: C.highlightLabel }}>
                         {t(`highlights.${item.key}.label`)}
                       </div>
                     </div>

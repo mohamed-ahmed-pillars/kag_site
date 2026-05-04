@@ -48,10 +48,8 @@ export function ThemeToggle() {
                 border: 'none',
                 cursor: 'pointer',
                 flexShrink: 0,
-                background: isDark ? '#1e1e1e' : '#e8e8e8',
-                boxShadow: isDark
-                    ? '4px 4px 8px #111111, -4px -4px 8px #2e2e2e'
-                    : '4px 4px 8px #c8c8c8, -4px -4px 8px #ffffff',
+                background: isDark ? '#ffffff' : '#111111',
+                boxShadow: 'none',
             }}
         >
             {/* Sun icon — logical start position handles RTL automatically */}
@@ -88,10 +86,8 @@ export function ThemeToggle() {
                             : 'translateX(28px)'
                         : 'translateX(0)',
                     transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                    background: isDark ? '#2a2a2a' : '#ffffff',
-                    boxShadow: isDark
-                        ? 'inset 2px 2px 4px #111111, inset -2px -2px 4px #3a3a3a'
-                        : 'inset 2px 2px 4px #e0e0e0, inset -2px -2px 4px #ffffff, 2px 2px 6px #d0d0d0',
+                    background: isDark ? '#111111' : '#ffffff',
+                    boxShadow: 'none',
                     zIndex: 2,
                 }}
             />

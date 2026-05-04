@@ -19,7 +19,7 @@ export default function BlogPage() {
     activeCategory === 'all' ? posts : posts.filter((p) => p.category === activeCategory);
 
   return (
-    <section className="py-20 bg-white min-h-screen">
+    <section className="py-20 min-h-screen">
       <Container>
         {/* Header */}
         <motion.div
@@ -30,20 +30,20 @@ export default function BlogPage() {
         >
           <div className="flex justify-center mb-4">
             <div
-              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5]"
+              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] dark:bg-[#1e1e1e]"
               style={{
-                borderTop: '1px solid rgba(255,255,255,0.8)',
-                boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+                borderTop: 'var(--card-border-top)',
+                boxShadow: 'var(--card-shadow)',
               }}
             >
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
                 <Newspaper className="w-4 h-4" />
                 {t('badge')}
               </span>
             </div>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('title')}</h1>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">{t('subtitle')}</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">{t('title')}</h1>
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t('subtitle')}</p>
         </motion.div>
 
         {/* Category filter */}
@@ -52,11 +52,11 @@ export default function BlogPage() {
             <motion.button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className="px-5 py-2 rounded-full font-medium text-gray-700 text-sm transition-all"
+              className="px-5 py-2 rounded-full font-medium text-gray-700 dark:text-gray-300 text-sm transition-all"
               style={
                 activeCategory === category
-                  ? { background: '#e0e0e0', boxShadow: 'inset 3px 3px 7px rgba(0,0,0,0.12), inset -3px -3px 7px rgba(255,255,255,0.9)' }
-                  : { background: '#f5f5f5', borderTop: '1px solid rgba(255,255,255,0.8)', boxShadow: '3px 3px 8px rgba(0,0,0,0.12), -3px -3px 8px rgba(255,255,255,0.9)' }
+                  ? { background: 'var(--cat-active-bg)', boxShadow: 'var(--cat-active-shadow)' }
+                  : { background: 'var(--cat-inactive-bg)', borderTop: 'var(--cat-inactive-border-top)', boxShadow: 'var(--cat-inactive-shadow)' }
               }
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -76,7 +76,7 @@ export default function BlogPage() {
                 title={locale === 'ar' ? post.title_ar : post.title_en}
                 src={post.image}
                 description={locale === 'ar' ? post.excerpt_ar : post.excerpt_en}
-                classNameExpanded="[&_h4]:text-black [&_h4]:font-semibold [&_h4]:text-lg"
+                classNameExpanded="[&_h4]:text-gray-900 dark:[&_h4]:text-gray-100 [&_h4]:font-semibold [&_h4]:text-lg"
               >
                 {bodyItems.map((item, i) => (
                   <React.Fragment key={i}>

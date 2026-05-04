@@ -43,7 +43,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <div style={{ backgroundColor: '#f8f8f8', borderTop: '4px solid #fbfbfb', borderBottom: '4px solid #fbfbfb' }} className="w-full">
+      <div style={{ backgroundColor: 'var(--section-alt-bg)', borderTop: '4px solid var(--section-alt-border)', borderBottom: '4px solid var(--section-alt-border)' }} className="w-full">
         <section className="flex items-center justify-center py-24 px-4 max-w-4xl mx-auto">
           <MagicText text={t('quote')} />
         </section>
@@ -52,24 +52,24 @@ export default function HomePage() {
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
             <div
-              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5]"
+              className="inline-block rounded-3xl px-4 py-1.5 bg-[#f5f5f5] dark:bg-[#1e1e1e]"
               style={{
-                borderTop: '1px solid rgba(255,255,255,0.8)',
-                boxShadow: '0 8px 16px -4px rgba(0,0,0,0.35), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.25), -4px -4px 8px rgba(255,255,255,0.9)',
+                borderTop: 'var(--card-border-top)',
+                boxShadow: 'var(--card-shadow)',
               }}
             >
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
                 <Star className="w-4 h-4" />
                 {t('benefits.badge')}
               </span>
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('benefits.title')}</h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">{t('benefits.title')}</h2>
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             {t('benefits.subtitle')}
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {featureCards.map((card, index) => (
             <FeatureCard
               key={card.title}

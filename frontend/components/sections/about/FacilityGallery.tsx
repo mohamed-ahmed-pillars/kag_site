@@ -1,9 +1,25 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
 import { Factory, Truck, FlaskConical, PackageCheck, Warehouse, Users } from 'lucide-react';
 import { Container, SectionTitle } from '@/components/ui';
+
+function useIsDark() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return false;
+  return resolvedTheme === 'dark';
+}
+
+// ── FacilityGallery colors — edit here to test ────────────────────
+const facilityColors = (isDark: boolean) => ({
+  facilityIcon: isDark ? '#9ca3af' : '#354c9a',   // facility placeholder icons
+});
+// ─────────────────────────────────────────────────────────────────
 
 const facilities = [
   { key: 'production', icon: Factory },
@@ -16,9 +32,10 @@ const facilities = [
 
 export default function FacilityGallery() {
   const t = useTranslations('about.facilities');
+  const C = facilityColors(useIsDark());
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-[#0f0f0f]">
       <Container>
         <SectionTitle title={t('title')} subtitle={t('subtitle')} />
 
@@ -36,15 +53,15 @@ export default function FacilityGallery() {
               >
                 <div
                   className="relative aspect-[4/3] rounded-2xl overflow-hidden transition-all duration-300"
-                  style={{ background: '#f5f5f5', borderTop: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 8px 16px -4px rgba(0,0,0,0.2), inset 0 2px 0 rgba(255,255,255,0.5), 4px 4px 8px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.9)' }}
+                  style={{ background: 'var(--card-bg)', borderTop: 'var(--card-border-top)', boxShadow: 'var(--card-shadow)' }}
                 >
                   {/* Placeholder Image */}
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'linear-gradient(145deg, #eeeeee, #e0e0e0)' }}>
+                  <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'var(--neuo-surface)' }}>
                     <div
                       className="w-20 h-20 rounded-2xl flex items-center justify-center"
-                      style={{ background: '#ebebeb', boxShadow: '3px 3px 6px rgba(0,0,0,0.09), -2px -2px 5px rgba(255,255,255,0.92)' }}
+                      style={{ background: 'var(--neuo-badge-bg)', boxShadow: 'var(--neuo-badge-shadow)' }}
                     >
-                      <Icon className="w-10 h-10 text-gray-600" />
+                      <Icon className="w-10 h-10" style={{ color: C.facilityIcon }} />
                     </div>
                   </div>
 

@@ -15,10 +15,12 @@ backend/.cache/
 backend/build/
 backend/dist/
 
-# Env
+# Env — never commit secrets
 .env
 .env.local
 .env.*.local
+backend/.env
+frontend/.env.local
 
 # Debug
 npm-debug.log*
@@ -42,3 +44,6 @@ pnpm-lock.yaml
 
 # Docker
 *.log
+
+# Internal tooling
+.superpowers/

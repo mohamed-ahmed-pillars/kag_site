@@ -4,6 +4,7 @@ import * as React from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Check, X } from "lucide-react";
+import Link from "next/link";
 import { FlowButton } from "@/components/ui/flow-button";
 import { cn } from "@/lib/utils";
 
@@ -277,9 +278,9 @@ export function ProductExpandableCard({
                 )}
 
                 {/* CTA */}
-                <a href={quoteHref}>
+                <Link href={quoteHref}>
                   <FlowButton text="Request a Quote" variant="solid" />
-                </a>
+                </Link>
               </div>
             </motion.div>
           </div>
@@ -344,18 +345,21 @@ export function ProductExpandableCard({
           </div>
         </motion.div>
 
-        <motion.div
-          style={{ rotateX, rotateY }}
-          className="absolute -right-4 -bottom-4 sm:-right-8 sm:-bottom-8 md:-right-12 md:-bottom-12 z-10 pointer-events-none"
-        >
-          <motion.img
-            src={imageSrc}
-            alt={imageAlt}
-            whileHover={{ scale: 1.1, y: -20, x: 10 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="h-28 w-28 sm:h-40 sm:w-40 md:h-56 md:w-56 object-contain"
-          />
-        </motion.div>
+        {/* Floating product image — hide when expanded to avoid snap */}
+        {!active && (
+          <motion.div
+            style={{ rotateX, rotateY }}
+            className="absolute -right-4 -bottom-4 sm:-right-8 sm:-bottom-8 md:-right-12 md:-bottom-12 z-10 pointer-events-none"
+          >
+            <motion.img
+              src={imageSrc}
+              alt={imageAlt}
+              whileHover={{ scale: 1.1, y: -20, x: 10 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="h-28 w-28 sm:h-40 sm:w-40 md:h-56 md:w-56 object-contain"
+            />
+          </motion.div>
+        )}
       </div>
     </>
   );

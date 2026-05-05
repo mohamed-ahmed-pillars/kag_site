@@ -1,11 +1,34 @@
 'use client';
 
+import { useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { Droplets, Leaf, Flame, ShoppingBag, Package } from 'lucide-react';
 import { Container, SectionTitle } from '@/components/ui';
-import { ProductHighlightCard } from '@/components/ui/product-card';
+import { ProductExpandableCard } from '@/components/ui/product-expandable-card';
 import { FlowButton } from '@/components/ui/flow-button';
+
+const defaultSpecs = {
+  origin: 'Egypt',
+  shelfLife: '24 months',
+  storage: 'Store in cool, dry place',
+  sizes: ['250ml', '500ml', '1L', '5L', '18L'],
+};
+
+const defaultPackaging = [
+  { type: 'Glass Bottle', sizes: ['250ml', '500ml', '1L'] },
+  { type: 'PET Bottle', sizes: ['500ml', '1L', '2L'] },
+  { type: 'Tin Can', sizes: ['5L', '18L'] },
+];
+
+const defaultFeatures = [
+  'Cold-pressed for maximum freshness',
+  'No artificial preservatives',
+  'ISO 22000 certified facility',
+  'Export-grade quality control',
+  'Halal certified',
+  'Available for private label',
+];
 
 const products = [
   {
@@ -19,6 +42,8 @@ const products = [
     desc_ar: 'زيت عباد شمس نقي ومكرر للطبخ اليومي.',
     image: '/products/Tin_Can_Oil_copy.png',
     icon: Droplets,
+    brandLogo: '/yamkers_logo.png',
+    color: 'bg-yellow-50',
   },
   {
     id: 2,
@@ -31,6 +56,8 @@ const products = [
     desc_ar: 'زيت زيتون بكر معصور على البارد من أجود الزيتون.',
     image: '/products/Tin_Can_Olive_Oil_copy.png',
     icon: Leaf,
+    brandLogo: '/yamkers_logo.png',
+    color: 'bg-green-50',
   },
   {
     id: 3,
@@ -43,6 +70,8 @@ const products = [
     desc_ar: 'معجون طماطم مركز غني لنكهات أصيلة.',
     image: '/products/Tin_Can_tomato_copy.png',
     icon: ShoppingBag,
+    brandLogo: '/yamkers_logo.png',
+    color: 'bg-red-50',
   },
   {
     id: 4,
@@ -55,6 +84,8 @@ const products = [
     desc_ar: 'صلصة فلفل حار مصنوعة من الفلفل المختار يدوياً.',
     image: '/products/Tin_Can_Hot_Chili_copy[78].png',
     icon: Flame,
+    brandLogo: '/yamkers_logo.png',
+    color: 'bg-orange-50',
   },
   {
     id: 5,
@@ -67,6 +98,8 @@ const products = [
     desc_ar: 'طحينة ناعمة وكريمية مصنوعة من السمسم المحمص.',
     image: '/products/Tin_Can_Tahini_copy.png',
     icon: ShoppingBag,
+    brandLogo: '/yamkers_logo.png',
+    color: 'bg-amber-50',
   },
   {
     id: 6,
@@ -79,12 +112,15 @@ const products = [
     desc_ar: 'مخللات مشكلة تقليدية بطعم حامض مثالي.',
     image: '/products/Tin_Can_Plain_copy[58].png',
     icon: Leaf,
+    brandLogo: '/yamkers_logo.png',
+    color: 'bg-lime-50',
   },
 ];
 
 export default function ProductShowcase() {
   const t = useTranslations('home.products');
   const locale = useLocale();
+  const openFns = useRef<Record<number, () => void>>({});
 
   return (
     <section className="py-20">
@@ -109,17 +145,36 @@ export default function ProductShowcase() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 sm:gap-y-14 md:gap-y-16">
           {products.map((product) => {
             const Icon = product.icon;
+            const relatedProducts = products
+              .filter((p) => p.id !== product.id)
+              .slice(0, 4)
+              .map((p) => ({
+                id: p.id,
+                title: locale === 'ar' ? p.name_ar : p.name_en,
+                category: locale === 'ar' ? p.category_ar : p.category_en,
+                color: p.color,
+                imageSrc: p.image,
+                onClick: () => openFns.current[p.id]?.(),
+              }));
+
             return (
-              <Link key={product.id} href={`/${locale}/products/${product.slug}`}>
-                <ProductHighlightCard
-                  category={locale === 'ar' ? product.category_ar : product.category_en}
-                  categoryIcon={<Icon className="h-4 w-4" />}
-                  title={locale === 'ar' ? product.name_ar : product.name_en}
-                  description={locale === 'ar' ? product.desc_ar : product.desc_en}
-                  imageSrc={product.image}
-                  imageAlt={product.name_en}
-                />
-              </Link>
+              <ProductExpandableCard
+                key={product.id}
+                id={product.id}
+                category={locale === 'ar' ? product.category_ar : product.category_en}
+                categoryIcon={<Icon className="h-4 w-4" />}
+                title={locale === 'ar' ? product.name_ar : product.name_en}
+                description={locale === 'ar' ? product.desc_ar : product.desc_en}
+                imageSrc={product.image}
+                imageAlt={product.name_en}
+                brandLogoSrc={product.brandLogo}
+                specs={defaultSpecs}
+                packagingOptions={defaultPackaging}
+                features={defaultFeatures}
+                relatedProducts={relatedProducts}
+                quoteHref={`/${locale}/quotation`}
+                onRegisterOpen={(fn) => { openFns.current[product.id] = fn; }}
+              />
             );
           })}
         </div>

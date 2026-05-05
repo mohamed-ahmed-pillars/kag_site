@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
   MapPin, Phone, Mail, Clock, Send, CheckCircle, MessageSquare,
-  Facebook, Instagram, Linkedin, Twitter,
+  Facebook, Instagram, Linkedin,
 } from 'lucide-react';
 import { Container } from '@/components/ui';
 
@@ -54,10 +54,9 @@ const contactInfo = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
+  { icon: Facebook, href: 'https://www.facebook.com/share/1DNJqy7Bou/?mibextid=wwXIfr', label: 'Facebook' },
+  { icon: Instagram, href: 'https://www.instagram.com/kag.egypt', label: 'Instagram' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/kagegypt/', label: 'LinkedIn' },
 ];
 
 const neuDisc = {
@@ -138,7 +137,7 @@ export default function ContactPage() {
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
                   return (
-                    <a key={social.label} href={social.href} className="w-10 h-10 rounded-full flex items-center justify-center transition hover:scale-105" style={neuDisc} aria-label={social.label}>
+                    <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center transition hover:scale-105" style={neuDisc} aria-label={social.label}>
                       <Icon className="w-4 h-4" style={{ color: C.socialIcon }} />
                     </a>
                   );

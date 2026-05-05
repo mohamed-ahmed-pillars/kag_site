@@ -3,7 +3,7 @@
 import * as React from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useTheme } from "next-themes";
-import { Check, X } from "lucide-react";
+import { Check, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { FlowButton } from "@/components/ui/flow-button";
 import { cn } from "@/lib/utils";
@@ -19,6 +19,8 @@ function useIsDark() {
 const cardColors = (isDark: boolean) => ({
   categoryText: isDark ? "#9ca3af" : "#354c9a",
   titleText: isDark ? "#f3f4f6" : "#354c9a",
+  brandColor: isDark ? "#ffffff" : "#354c9a",
+  brandColorBg: isDark ? "#ffffff1a" : "#354c9a1a",
 });
 
 export interface RelatedProduct {
@@ -50,6 +52,24 @@ export interface ProductExpandableCardProps {
     sizes: string[];
   }[];
   features: string[];
+  nutritionFacts?: {
+    servingSize: string;
+    calories: number;
+    totalFat: { g: number; dv: number };
+    saturatedFat: { g: number; dv: number };
+    transFat: { g: number };
+    cholesterol: { mg: number; dv: number };
+    sodium: { mg: number; dv: number };
+    totalCarbs: { g: number; dv: number };
+    dietaryFiber: { g: number; dv: number };
+    totalSugars: { g: number };
+    addedSugars: { g: number; dv: number };
+    protein: { g: number };
+    vitaminD?: { mcg: number; dv: number };
+    calcium?: { mg: number; dv: number };
+    iron?: { mg: number; dv: number };
+    potassium?: { mg: number; dv: number };
+  };
   relatedProducts: RelatedProduct[];
   quoteHref: string;
   className?: string;
@@ -68,6 +88,7 @@ export function ProductExpandableCard({
   specs,
   packagingOptions,
   features,
+  nutritionFacts,
   relatedProducts,
   quoteHref,
   className,
@@ -77,6 +98,8 @@ export function ProductExpandableCard({
   const cardRef = React.useRef<HTMLDivElement>(null);
   const uid = React.useId();
   const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [showScrollHint, setShowScrollHint] = React.useState(true);
   const COLORS = cardColors(useIsDark());
 
   React.useEffect(() => {
@@ -100,21 +123,29 @@ export function ProductExpandableCard({
   const imgRY = useSpring(useTransform(imgX, [0, 300], [-8, 8]), springConfig);
 
   React.useEffect(() => {
-    if (!active) return;
+    if (!active) { setShowScrollHint(true); return; }
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKeyDown = (e: KeyboardEvent) => { if (e.key === "Escape") setActive(false); };
     const onClickOutside = (e: MouseEvent | TouchEvent) => {
       if (cardRef.current && !cardRef.current.contains(e.target as Node)) setActive(false);
     };
+    const onScroll = () => {
+      const el = scrollRef.current;
+      if (!el) return;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 8;
+      setShowScrollHint(!atBottom);
+    };
     window.addEventListener("keydown", onKeyDown);
     document.addEventListener("mousedown", onClickOutside);
     document.addEventListener("touchstart", onClickOutside);
+    scrollRef.current?.addEventListener("scroll", onScroll);
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("mousedown", onClickOutside);
       document.removeEventListener("touchstart", onClickOutside);
+      scrollRef.current?.removeEventListener("scroll", onScroll);
     };
   }, [active]);
 
@@ -145,9 +176,15 @@ export function ProductExpandableCard({
             <motion.div
               layoutId={`product-card-${id}-${uid}`}
               ref={cardRef}
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] rounded-3xl bg-white dark:bg-zinc-900 shadow-2xl"
-              style={{ borderTop: 'var(--card-border-top)' }}
+              className="w-full max-w-4xl rounded-3xl bg-white dark:bg-zinc-900 shadow-2xl"
+              style={{ borderTop: 'var(--card-border-top)', maxHeight: '90vh' }}
             >
+              <div
+                ref={scrollRef}
+                className="h-full max-h-[90vh] overflow-y-auto overscroll-contain [scrollbar-width:none] [-ms-overflow-style:none] rounded-3xl"
+                onWheel={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
+              >
               {/* Close button */}
               <div className="sticky top-0 z-10 flex justify-end p-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-t-3xl">
                 <button
@@ -162,7 +199,7 @@ export function ProductExpandableCard({
               <div className="px-6 pb-10 flex flex-col items-center gap-8">
                 {/* Brand logo */}
                 {brandLogoSrc && (
-                  <img src={brandLogoSrc} alt="brand logo" className="h-16 w-auto object-contain" />
+                  <img src={brandLogoSrc} alt="brand logo" className="h-36 w-auto object-contain dark:brightness-0 dark:invert" />
                 )}
 
                 {/* Product image with 3D tilt */}
@@ -181,13 +218,13 @@ export function ProductExpandableCard({
                     alt={imageAlt}
                     whileHover={{ scale: 1.08, y: -12 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="h-48 md:h-64 w-auto object-contain"
+                    className="h-80 md:h-96 w-auto object-contain"
                   />
                 </motion.div>
 
                 {/* Name + description */}
                 <div className="text-center">
-                  <h2 className="text-3xl font-bold tracking-tight mb-2" style={{ color: '#354c9a' }}>
+                  <h2 className="text-3xl font-bold tracking-tight mb-2" style={{ color: COLORS.titleText }}>
                     {title}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto">
@@ -195,23 +232,32 @@ export function ProductExpandableCard({
                   </p>
                 </div>
 
-                {/* Quick Specs */}
+                {/* Specifications */}
                 <div className="w-full">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Quick Specs</h3>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: COLORS.brandColor }}>Specifications</h3>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { label: "Origin", value: specs.origin },
-                      { label: "Shelf Life", value: specs.shelfLife },
-                      { label: "Storage", value: specs.storage },
-                      { label: "Sizes", value: specs.sizes.join(", ") },
-                    ].map(({ label, value }) => (
+                      { label: "Origin", values: [specs.origin] },
+                      { label: "Shelf Life", values: [specs.shelfLife] },
+                      { label: "Storage", values: [specs.storage] },
+                      { label: "Sizes", values: specs.sizes },
+                    ].map(({ label, values }) => (
                       <div
                         key={label}
                         className="rounded-2xl p-4"
                         style={{ backgroundColor: 'var(--card-bg)', borderTop: 'var(--card-border-top)', boxShadow: 'var(--card-shadow)' }}
                       >
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{label}</p>
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{value}</p>
+                        <p className="text-xs font-medium mb-2" style={{ color: COLORS.brandColor }}>{label}</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {values.map((v) => (
+                            <span
+                              key={v}
+                              className="text-xs px-2 py-0.5 rounded-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-400"
+                            >
+                              {v}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -219,15 +265,15 @@ export function ProductExpandableCard({
 
                 {/* Packaging Options */}
                 <div className="w-full">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Packaging Options</h3>
-                  <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none]">
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: COLORS.brandColor }}>Packaging Options</h3>
+                  <div className="flex flex-wrap justify-center gap-3">
                     {packagingOptions.map((opt) => (
                       <div
                         key={opt.type}
-                        className="shrink-0 rounded-2xl p-4 min-w-[160px]"
+                        className="rounded-2xl p-4 w-[160px]"
                         style={{ backgroundColor: 'var(--card-bg)', borderTop: 'var(--card-border-top)', boxShadow: 'var(--card-shadow)' }}
                       >
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">{opt.type}</p>
+                        <p className="text-sm font-semibold mb-2" style={{ color: COLORS.brandColor }}>{opt.type}</p>
                         <div className="flex flex-wrap gap-1.5">
                           {opt.sizes.map((size) => (
                             <span
@@ -243,14 +289,55 @@ export function ProductExpandableCard({
                   </div>
                 </div>
 
+                {/* Nutrition Facts */}
+                {nutritionFacts && (
+                  <div className="w-full">
+                    <h3 className="text-lg font-semibold mb-3" style={{ color: COLORS.brandColor }}>Nutrition Facts</h3>
+                    <div className="p-2.5 font-sans max-w-[260px] mx-auto text-xs" style={{ border: `4px solid ${COLORS.brandColor}`, color: COLORS.brandColor }}>
+                      <p className="text-2xl font-extrabold leading-none">Nutrition Facts</p>
+                      <div className="mt-1" style={{ borderBottom: `8px solid ${COLORS.brandColor}` }} />
+                      <div className="flex justify-between items-end">
+                        <span className="text-xl font-extrabold">Calories</span>
+                        <span className="text-3xl font-extrabold">{nutritionFacts.calories}</span>
+                      </div>
+                      <div className="mt-1" style={{ borderBottom: `4px solid ${COLORS.brandColor}` }} />
+                      <p className="font-bold text-right text-[10px]">% Daily Value*</p>
+                      {[
+                        { label: <><span className="font-bold">Total Fat</span> {nutritionFacts.totalFat.g}g</>, dv: nutritionFacts.totalFat.dv },
+                        { label: <>Saturated Fat {nutritionFacts.saturatedFat.g}g</>, dv: nutritionFacts.saturatedFat.dv, indent: true },
+                        { label: <><span className="italic">Trans</span> Fat {nutritionFacts.transFat.g}g</>, indent: true },
+                        { label: <><span className="font-bold">Cholesterol</span> {nutritionFacts.cholesterol.mg}mg</>, dv: nutritionFacts.cholesterol.dv },
+                        { label: <><span className="font-bold">Sodium</span> {nutritionFacts.sodium.mg}mg</>, dv: nutritionFacts.sodium.dv },
+                        { label: <><span className="font-bold">Total Carbohydrate</span> {nutritionFacts.totalCarbs.g}g</>, dv: nutritionFacts.totalCarbs.dv },
+                        { label: <>Dietary Fiber {nutritionFacts.dietaryFiber.g}g</>, dv: nutritionFacts.dietaryFiber.dv, indent: true },
+                        { label: <>Total Sugars {nutritionFacts.totalSugars.g}g</>, indent: true },
+                        { label: <>Includes {nutritionFacts.addedSugars.g}g Added Sugars</>, dv: nutritionFacts.addedSugars.dv, indent: true, doubleIndent: true },
+                        { label: <><span className="font-bold">Protein</span> {nutritionFacts.protein.g}g</> },
+                      ].map((row, i) => (
+                        <div key={i} className={`flex justify-between py-px ${row.indent ? 'pl-3' : ''} ${(row as { doubleIndent?: boolean }).doubleIndent ? 'pl-6' : ''}`} style={{ borderTop: `1px solid ${COLORS.brandColor}` }}>
+                          <span>{row.label}</span>
+                          {(row as { dv?: number }).dv !== undefined && <span className="font-bold">{(row as { dv?: number }).dv}%</span>}
+                        </div>
+                      ))}
+                      <div className="mt-1" style={{ borderTop: `8px solid ${COLORS.brandColor}` }} />
+                      <div className="grid grid-cols-2 gap-x-2 mt-1">
+                        {nutritionFacts.vitaminD && <span>Vitamin D {nutritionFacts.vitaminD.mcg}mcg <b>{nutritionFacts.vitaminD.dv}%</b></span>}
+                        {nutritionFacts.calcium && <span>Calcium {nutritionFacts.calcium.mg}mg <b>{nutritionFacts.calcium.dv}%</b></span>}
+                        {nutritionFacts.iron && <span>Iron {nutritionFacts.iron.mg}mg <b>{nutritionFacts.iron.dv}%</b></span>}
+                        {nutritionFacts.potassium && <span>Potassium {nutritionFacts.potassium.mg}mg <b>{nutritionFacts.potassium.dv}%</b></span>}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Product Features */}
                 <div className="w-full">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Product Features</h3>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: COLORS.brandColor }}>Product Features</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {features.map((feature) => (
                       <div key={feature} className="flex items-start gap-2">
-                        <div className="mt-0.5 shrink-0 h-5 w-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#354c9a1a' }}>
-                          <Check className="w-3 h-3" style={{ color: '#354c9a' }} />
+                        <div className="mt-0.5 shrink-0 h-5 w-5 rounded-full flex items-center justify-center" style={{ backgroundColor: COLORS.brandColorBg }}>
+                          <Check className="w-3 h-3" style={{ color: COLORS.brandColor }} />
                         </div>
                         <span className="text-sm text-gray-600 dark:text-gray-400">{feature}</span>
                       </div>
@@ -261,8 +348,8 @@ export function ProductExpandableCard({
                 {/* Related Products */}
                 {relatedProducts.length > 0 && (
                   <div className="w-full">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Related Products</h3>
-                    <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none]">
+                    <h3 className="text-lg font-semibold mb-3" style={{ color: COLORS.brandColor }}>Related Products</h3>
+                    <div className="flex flex-wrap justify-center gap-3">
                       {relatedProducts.map((rel) => (
                         <button
                           key={rel.id}
@@ -271,15 +358,15 @@ export function ProductExpandableCard({
                           if (timeoutRef.current) clearTimeout(timeoutRef.current);
                           timeoutRef.current = setTimeout(rel.onClick, 150);
                         }}
-                          className={cn("shrink-0 rounded-2xl overflow-hidden w-32 h-32 relative cursor-pointer group", rel.color)}
+                          className={cn("rounded-2xl overflow-hidden w-48 h-40 relative cursor-pointer group", rel.color)}
                         >
                           <img
                             src={rel.imageSrc}
                             alt={rel.title}
-                            className="absolute bottom-0 right-0 h-20 w-20 object-contain group-hover:scale-110 transition-transform duration-300"
+                            className="absolute bottom-0 right-0 h-28 w-28 object-contain group-hover:scale-110 transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 rounded-2xl" />
-                          <p className="absolute top-2 left-2 text-xs font-semibold text-gray-800 dark:text-gray-100 max-w-[70%] leading-tight">
+                          <p className="absolute top-2 left-2 text-sm font-semibold max-w-[60%] leading-tight" style={{ color: '#354c9a' }}>
                             {rel.title}
                           </p>
                         </button>
@@ -292,6 +379,24 @@ export function ProductExpandableCard({
                 <Link href={quoteHref}>
                   <FlowButton text="Request a Quote" variant="solid" />
                 </Link>
+              </div>
+
+              {/* Scroll hint */}
+              <AnimatePresence>
+                {showScrollHint && (
+                  <motion.div
+                    initial={{ opacity: 1 }}
+                    animate={{ y: [0, 6, 0] }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.2, repeat: Infinity, repeatType: "loop", ease: "easeInOut" }}
+                    className="sticky bottom-4 flex justify-end pr-4 pointer-events-none"
+                  >
+                    <div className="flex flex-col items-center gap-1 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-md">
+                      <ChevronDown className="w-4 h-4" style={{ color: COLORS.brandColor }} />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
               </div>
             </motion.div>
           </div>
@@ -348,12 +453,11 @@ export function ProductExpandableCard({
                   <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight" style={{ color: COLORS.titleText }}>
                     {title}
                   </h2>
-                  <p className="mt-1 max-w-[60%] text-sm text-muted-foreground">{description}</p>
                 </div>
               </div>
               {brandLogoSrc && (
                 <div className="flex items-end">
-                  <img src={brandLogoSrc} alt="brand logo" className="h-16 sm:h-20 md:h-24 w-auto object-contain" />
+                  <img src={brandLogoSrc} alt="brand logo" className="h-16 sm:h-20 md:h-24 w-auto object-contain dark:brightness-0 dark:invert" />
                 </div>
               )}
             </div>
@@ -364,7 +468,8 @@ export function ProductExpandableCard({
         {!active && (
           <motion.div
             style={{ rotateX, rotateY }}
-            className="absolute -right-4 -bottom-4 sm:-right-8 sm:-bottom-8 md:-right-12 md:-bottom-12 z-10 pointer-events-none"
+            onClick={() => setActive(true)}
+            className="absolute -right-4 -bottom-4 sm:-right-8 sm:-bottom-8 md:-right-12 md:-bottom-12 z-10 cursor-pointer"
           >
             <motion.img
               src={imageSrc}

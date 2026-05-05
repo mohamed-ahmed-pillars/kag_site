@@ -109,7 +109,7 @@ export default function LatestNews() {
                 title={locale === 'ar' ? post.title_ar : post.title_en}
                 src={post.image}
                 description={locale === 'ar' ? post.excerpt_ar : post.excerpt_en}
-                classNameExpanded="[&_h4]:text-black [&_h4]:font-semibold [&_h4]:text-lg"
+                classNameExpanded="[&_h4]:text-black dark:[&_h4]:text-white [&_h4]:font-semibold [&_h4]:text-lg"
               >
                 {bodyItems.map((item, i) => (
                   <React.Fragment key={i}>

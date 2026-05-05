@@ -47,3 +47,5 @@ pnpm-lock.yaml
 
 # Internal tooling
 .superpowers/
+heroPrompts.txt
+social.txt

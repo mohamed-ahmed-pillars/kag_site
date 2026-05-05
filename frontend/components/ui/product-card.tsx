@@ -29,10 +29,11 @@ interface ProductHighlightCardProps {
   description: string;
   imageSrc: string;
   imageAlt: string;
+  brandLogoSrc?: string;
 }
 
 export const ProductHighlightCard = React.forwardRef<HTMLDivElement, ProductHighlightCardProps>(
-  ({ className, categoryIcon, category, title, description, imageSrc, imageAlt }, ref) => {
+  ({ className, categoryIcon, category, title, description, imageSrc, imageAlt, brandLogoSrc }, ref) => {
     const COLORS = cardColors(useIsDark());
 
     const mouseX = useMotionValue(0);
@@ -91,20 +92,31 @@ export const ProductHighlightCard = React.forwardRef<HTMLDivElement, ProductHigh
               }}
             />
 
-            <div className="relative z-10 flex h-full flex-col justify-start p-6 gap-2">
-              <div className="flex items-center space-x-2" style={{ color: COLORS.categoryText }}>
-                {categoryIcon}
-                <span className="text-sm font-medium">{category}</span>
+            <div className="relative z-10 flex h-full flex-col justify-between p-6 gap-2">
+              <div>
+                <div className="flex items-center space-x-2" style={{ color: COLORS.categoryText }}>
+                  {categoryIcon}
+                  <span className="text-sm font-medium">{category}</span>
+                </div>
+                <div className="mt-4">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight" style={{ color: COLORS.titleText }}>{title}</h2>
+                  <p className="mt-1 max-w-[60%] text-sm text-muted-foreground">{description}</p>
+                </div>
               </div>
-              <div className="mt-4">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight" style={{ color: COLORS.titleText }}>{title}</h2>
-                <p className="mt-1 max-w-[60%] text-sm text-muted-foreground">{description}</p>
-              </div>
+              {brandLogoSrc && (
+                <div className="flex items-end">
+                  <img
+                    src={brandLogoSrc}
+                    alt="brand logo"
+                    className="h-16 sm:h-20 md:h-24 w-auto object-contain"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
 
-        {/* Image wrapper tilts with card but stays in 2D context for stable hover */}
+        {/* Product image */}
         <motion.div
           style={{ rotateX: springRotateX, rotateY: springRotateY }}
           className="absolute -right-4 -bottom-4 sm:-right-8 sm:-bottom-8 md:-right-12 md:-bottom-12 z-10"

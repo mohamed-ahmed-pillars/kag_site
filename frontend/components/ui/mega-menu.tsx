@@ -69,7 +69,7 @@ const MegaMenu = React.forwardRef<HTMLUListElement, MegaMenuProps>(
             {navItem.link ? (
               <a
                 href={getLocalizedHref(navItem.link)}
-                className="relative flex cursor-pointer items-center justify-center gap-1 py-1.5 px-4 text-sm font-medium text-black dark:text-white transition-colors duration-300 hover:text-black dark:hover:text-white group"
+                className="relative flex cursor-pointer items-center justify-center gap-1 py-1.5 px-4 text-sm font-medium text-[#354c9a] dark:text-white transition-colors duration-300 dark:hover:text-white group"
                 onMouseEnter={() => setIsHover(navItem.id)}
                 onMouseLeave={() => setIsHover(null)}
               >
@@ -86,16 +86,15 @@ const MegaMenu = React.forwardRef<HTMLUListElement, MegaMenuProps>(
               </a>
             ) : (
               <button
-                className="relative flex cursor-pointer items-center justify-center gap-1 py-1.5 px-4 text-sm font-medium text-black dark:text-white transition-colors duration-300 hover:text-black dark:hover:text-white group"
+                className="relative flex cursor-pointer items-center justify-center gap-1 py-1.5 px-4 text-sm font-medium text-[#354c9a] dark:text-white transition-colors duration-300 dark:hover:text-white group"
                 onMouseEnter={() => setIsHover(navItem.id)}
                 onMouseLeave={() => setIsHover(null)}
               >
                 <span>{navItem.label}</span>
                 {navItem.subMenus && (
                   <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-300 group-hover:rotate-180 ${
-                      openMenu === navItem.label ? "rotate-180" : ""
-                    }`}
+                    className={`h-4 w-4 transition-transform duration-300 group-hover:rotate-180 ${openMenu === navItem.label ? "rotate-180" : ""
+                      }`}
                   />
                 )}
                 {(isHover === navItem.id || openMenu === navItem.label) && (
@@ -127,11 +126,10 @@ const MegaMenu = React.forwardRef<HTMLUListElement, MegaMenuProps>(
                       {navItem.subMenus.map((sub, subIndex) => (
                         <motion.div
                           layout
-                          className={`p-6 ${
-                            sub.variant === "simple"
+                          className={`p-6 ${sub.variant === "simple"
                               ? "bg-[#f3f4f6] dark:bg-[#2a2a2a] rounded-2xl m-2 ml-0"
                               : ""
-                          }`}
+                            }`}
                           key={sub.title}
                         >
                           <h3 className="mb-5 text-sm font-semibold text-gray-600 dark:text-gray-400">
@@ -145,10 +143,10 @@ const MegaMenu = React.forwardRef<HTMLUListElement, MegaMenuProps>(
                                   <li key={item.label}>
                                     <a
                                       href={getLocalizedHref(item.href || "#")}
-                                      className="group relative flex items-center text-sm font-medium text-gray-900 dark:text-gray-100 px-4 py-2.5 rounded-xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-lg"
+                                      className="group relative flex items-center text-sm font-medium text-[#354c9a] dark:text-gray-100 px-4 py-2.5 rounded-xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-lg"
                                     >
                                       <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 bg-[#f3f4f6] dark:bg-[#2a2a2a] rounded-full opacity-0 group-hover:w-[300px] group-hover:h-[300px] group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
-                                      <ArrowRight className="absolute w-4 h-4 left-[-20px] text-gray-900 dark:text-gray-100 z-10 group-hover:left-4 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]" />
+                                      <ArrowRight className="absolute w-4 h-4 left-[-20px] text-[#354c9a] dark:text-gray-100 z-10 group-hover:left-4 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]" />
                                       <span className="relative z-10 transition-all duration-500 ease-out group-hover:translate-x-6">
                                         {item.label}
                                       </span>
@@ -189,7 +187,7 @@ const MegaMenu = React.forwardRef<HTMLUListElement, MegaMenuProps>(
                                       className="group relative flex items-start gap-3 p-3 rounded-xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-lg cursor-pointer"
                                     >
                                       <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 bg-[#f3f4f6] dark:bg-[#2a2a2a] rounded-full opacity-0 group-hover:w-[400px] group-hover:h-[400px] group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
-                                      <ArrowRight className="absolute w-4 h-4 left-[-20px] top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-100 z-10 group-hover:left-2 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]" />
+                                      <ArrowRight className="absolute w-4 h-4 left-[-20px] top-1/2 -translate-y-1/2 text-[#354c9a] dark:text-gray-100 z-10 group-hover:left-2 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]" />
                                       {Icon && (
                                         <div className="relative z-10 flex size-11 shrink-0 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 transition-all duration-300 group-hover:bg-white dark:group-hover:bg-[#1e1e1e] group-hover:text-black dark:group-hover:text-white group-hover:translate-x-5">
                                           <Icon className="h-5 w-5" />
@@ -197,7 +195,7 @@ const MegaMenu = React.forwardRef<HTMLUListElement, MegaMenuProps>(
                                       )}
                                       <div className="relative z-10 flex flex-col transition-all duration-500 ease-out group-hover:translate-x-5">
                                         <div className="flex items-center gap-2">
-                                          <span className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">
+                                          <span className="text-sm font-medium text-[#354c9a] dark:text-gray-100 transition-colors duration-300">
                                             {item.label}
                                           </span>
                                           {item.badge && (

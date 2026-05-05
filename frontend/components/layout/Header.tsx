@@ -171,7 +171,7 @@ export function Header() {
                         alt="KAG Logo"
                         width={120}
                         height={40}
-                        className="h-30 w-auto dark:invert"
+                        className="w-20 h-auto md:w-48 dark:invert"
                         priority
                     />
                 </Link>

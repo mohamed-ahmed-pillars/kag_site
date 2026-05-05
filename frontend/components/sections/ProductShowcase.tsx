@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useCallback, useMemo } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { Droplets, Leaf, Flame, ShoppingBag, Package } from 'lucide-react';
@@ -122,6 +122,29 @@ export default function ProductShowcase() {
   const locale = useLocale();
   const openFns = useRef<Record<number, () => void>>({});
 
+  const makeRegisterOpen = useCallback((id: number) => (fn: () => void) => {
+    openFns.current[id] = fn;
+  }, []);
+
+  const relatedProductsMap = useMemo(() => {
+    return Object.fromEntries(
+      products.map((product) => [
+        product.id,
+        products
+          .filter((p) => p.id !== product.id)
+          .slice(0, 4)
+          .map((p) => ({
+            id: p.id,
+            title: locale === 'ar' ? p.name_ar : p.name_en,
+            category: locale === 'ar' ? p.category_ar : p.category_en,
+            color: p.color,
+            imageSrc: p.image,
+            onClick: () => openFns.current[p.id]?.(),
+          })),
+      ])
+    );
+  }, [locale]);
+
   return (
     <section className="py-20">
       <Container>
@@ -145,17 +168,7 @@ export default function ProductShowcase() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 sm:gap-y-14 md:gap-y-16">
           {products.map((product) => {
             const Icon = product.icon;
-            const relatedProducts = products
-              .filter((p) => p.id !== product.id)
-              .slice(0, 4)
-              .map((p) => ({
-                id: p.id,
-                title: locale === 'ar' ? p.name_ar : p.name_en,
-                category: locale === 'ar' ? p.category_ar : p.category_en,
-                color: p.color,
-                imageSrc: p.image,
-                onClick: () => openFns.current[p.id]?.(),
-              }));
+            const relatedProducts = relatedProductsMap[product.id];
 
             return (
               <ProductExpandableCard
@@ -173,7 +186,7 @@ export default function ProductShowcase() {
                 features={defaultFeatures}
                 relatedProducts={relatedProducts}
                 quoteHref={`/${locale}/quotation`}
-                onRegisterOpen={(fn) => { openFns.current[product.id] = fn; }}
+                onRegisterOpen={makeRegisterOpen(product.id)}
               />
             );
           })}

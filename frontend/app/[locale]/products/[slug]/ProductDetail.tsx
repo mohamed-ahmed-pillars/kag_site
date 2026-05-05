@@ -24,7 +24,6 @@ interface Product {
   description_en: string;
   description_ar: string;
   category: string;
-  featured: boolean;
   color: string;
 }
 

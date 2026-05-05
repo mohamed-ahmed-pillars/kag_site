@@ -119,9 +119,14 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 shrink-0 text-gray-400 dark:text-gray-500" />
-                <a href="tel:+201234567890" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200">
-                  +20 123 456 7890
-                </a>
+                <div className="flex flex-col gap-0.5">
+                  <a href="tel:+201080838555" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200">
+                    {locale === 'ar' ? 'خدمة العملاء: ' : 'Customer Service: '}+20 108 083 8555
+                  </a>
+                  <a href="tel:+201080843334" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200">
+                    {locale === 'ar' ? 'الاقتراحات: ' : 'Suggestions: '}+20 108 084 3334
+                  </a>
+                </div>
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 shrink-0 text-gray-400 dark:text-gray-500" />

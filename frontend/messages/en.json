@@ -448,8 +448,12 @@
         "value": "Office 2B – 1st Floor, Building 4, Mivida Business Park 3, 5th Settlement, New Cairo, Egypt"
       },
       "phone": {
-        "title": "Phone",
-        "value": "+20 123 456 7890"
+        "title": "Customer Service",
+        "value": "+20 108 083 8555"
+      },
+      "phone2": {
+        "title": "Suggestions",
+        "value": "+20 108 084 3334"
       },
       "email": {
         "title": "Email",

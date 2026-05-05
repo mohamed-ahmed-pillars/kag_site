@@ -49,6 +49,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 const contactInfo = [
   { icon: MapPin, key: 'address' },
   { icon: Phone, key: 'phone' },
+  { icon: Phone, key: 'phone2' },
   { icon: Mail, key: 'email' },
   { icon: Clock, key: 'hours' },
 ];

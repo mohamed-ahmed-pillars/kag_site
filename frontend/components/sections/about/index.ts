@@ -3,3 +3,4 @@ export { default as CEOProfile } from './CEOProfile';
 export { default as Timeline } from './Timeline';
 export { default as MissionVision } from './MissionVision';
 export { default as FacilityGallery } from './FacilityGallery';
+export { default as ContactInfo } from './ContactInfo';

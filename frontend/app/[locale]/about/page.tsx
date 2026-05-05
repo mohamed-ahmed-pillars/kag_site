@@ -6,6 +6,7 @@ import {
   Timeline,
   MissionVision,
   FacilityGallery,
+  ContactInfo,
 } from '@/components/sections/about';
 
 export async function generateMetadata({
@@ -30,6 +31,7 @@ export default function AboutPage() {
       <MissionVision />
       <Timeline />
       <FacilityGallery />
+      <ContactInfo />
     </>
   );
 }

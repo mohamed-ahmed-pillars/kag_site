@@ -76,6 +76,7 @@ export function ProductExpandableCard({
   const [active, setActive] = React.useState(false);
   const cardRef = React.useRef<HTMLDivElement>(null);
   const uid = React.useId();
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const COLORS = cardColors(useIsDark());
 
   React.useEffect(() => {
@@ -99,23 +100,29 @@ export function ProductExpandableCard({
   const imgRY = useSpring(useTransform(imgX, [0, 300], [-8, 8]), springConfig);
 
   React.useEffect(() => {
+    if (!active) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const onKeyDown = (e: KeyboardEvent) => { if (e.key === "Escape") setActive(false); };
     const onClickOutside = (e: MouseEvent | TouchEvent) => {
       if (cardRef.current && !cardRef.current.contains(e.target as Node)) setActive(false);
     };
-    if (active) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", onKeyDown);
-      document.addEventListener("mousedown", onClickOutside);
-      document.addEventListener("touchstart", onClickOutside);
-    }
+    window.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onClickOutside);
+    document.addEventListener("touchstart", onClickOutside);
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("mousedown", onClickOutside);
       document.removeEventListener("touchstart", onClickOutside);
     };
   }, [active]);
+
+  React.useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   return (
     <>
@@ -240,8 +247,8 @@ export function ProductExpandableCard({
                 <div className="w-full">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Product Features</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {features.map((feature, i) => (
-                      <div key={i} className="flex items-start gap-2">
+                    {features.map((feature) => (
+                      <div key={feature} className="flex items-start gap-2">
                         <div className="mt-0.5 shrink-0 h-5 w-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#354c9a1a' }}>
                           <Check className="w-3 h-3" style={{ color: '#354c9a' }} />
                         </div>
@@ -259,7 +266,11 @@ export function ProductExpandableCard({
                       {relatedProducts.map((rel) => (
                         <button
                           key={rel.id}
-                          onClick={() => { setActive(false); setTimeout(rel.onClick, 150); }}
+                          onClick={() => {
+                          setActive(false);
+                          if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                          timeoutRef.current = setTimeout(rel.onClick, 150);
+                        }}
                           className={cn("shrink-0 rounded-2xl overflow-hidden w-32 h-32 relative cursor-pointer group", rel.color)}
                         >
                           <img
@@ -291,7 +302,11 @@ export function ProductExpandableCard({
       <div className="relative">
         <motion.div
           layoutId={`product-card-${id}-${uid}`}
+          role="button"
+          tabIndex={0}
+          aria-label={`View ${title} details`}
           onClick={() => setActive(true)}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(true); } }}
           onMouseMove={({ clientX, clientY, currentTarget }) => {
             const { left, top } = currentTarget.getBoundingClientRect();
             mouseX.set(clientX - left);

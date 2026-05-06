@@ -156,9 +156,8 @@
     "featured": "Featured",
     "viewDetails": "View Details",
     "categories": {
-      "oils": "Oils",
-      "sauces": "Sauces",
-      "pickles": "Pickles"
+      "fava_beans": "Fava Beans",
+      "tomato_paste": "Tomato Paste"
     },
     "detail": {
       "breadcrumb": {
@@ -166,9 +165,8 @@
         "products": "Products"
       },
       "categories": {
-        "oils": "Oils",
-        "sauces": "Sauces",
-        "pickles": "Pickles"
+        "fava_beans": "Fava Beans",
+        "tomato_paste": "Tomato Paste"
       },
       "quickSpecs": "Quick Specifications",
       "specs": {

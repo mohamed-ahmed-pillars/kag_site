@@ -125,9 +125,8 @@
     "featured": "مميز",
     "viewDetails": "عرض التفاصيل",
     "categories": {
-      "oils": "الزيوت",
-      "sauces": "الصلصات",
-      "pickles": "المخللات"
+      "fava_beans": "فول مدمس",
+      "tomato_paste": "معجون طماطم"
     },
     "detail": {
       "breadcrumb": {
@@ -135,9 +134,8 @@
         "products": "المنتجات"
       },
       "categories": {
-        "oils": "الزيوت",
-        "sauces": "الصلصات",
-        "pickles": "المخللات"
+        "fava_beans": "فول مدمس",
+        "tomato_paste": "معجون طماطم"
       },
       "quickSpecs": "المواصفات السريعة",
       "specs": {

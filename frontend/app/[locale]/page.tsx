@@ -12,15 +12,17 @@ import {
 } from '@/components/ui/benefit-illustrations';
 import { Star } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { useTranslations } from 'next-intl';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 const PrivateLabel = dynamic(() => import('@/components/sections/PrivateLabel'), { loading: () => <div className="py-16" /> });
 const GlobalMap    = dynamic(() => import('@/components/sections/GlobalMapClient'), { loading: () => <div className="py-16 h-[480px]" /> });
 const LatestNews   = dynamic(() => import('@/components/sections/LatestNews'),   { loading: () => <div className="py-20" /> });
 const Newsletter   = dynamic(() => import('@/components/sections/Newsletter'),   { loading: () => <div className="py-16" /> });
 
-export default function HomePage() {
-  const t = useTranslations('home');
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'home' });
 
   const featureCards = [
     {

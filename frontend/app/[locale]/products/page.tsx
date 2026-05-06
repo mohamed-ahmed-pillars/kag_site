@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Package } from 'lucide-react';
@@ -46,7 +46,9 @@ export default function ProductsPage() {
           onCategoryChange={setActiveCategory}
         />
 
-        <ProductGrid activeCategory={activeCategory} />
+        <Suspense>
+          <ProductGrid activeCategory={activeCategory} />
+        </Suspense>
       </Container>
     </section>
   );

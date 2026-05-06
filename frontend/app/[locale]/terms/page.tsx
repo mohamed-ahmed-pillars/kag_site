@@ -1,4 +1,4 @@
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Scale } from 'lucide-react';
 import { Container } from '@/components/ui';
 import LegalSections from '@/components/sections/LegalSections';
@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TermsPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'terms' });
   const sections = t.raw('sections') as { title: string; body: string }[];
 

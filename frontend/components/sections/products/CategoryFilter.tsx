@@ -2,13 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { useLocale } from 'next-intl';
-import { Droplets, Soup, Salad } from 'lucide-react';
+import { LayoutGrid, Leaf, Droplets } from 'lucide-react';
 
 const categories = [
-  { id: 'all', slug: 'all', name_en: 'All Products', name_ar: 'جميع المنتجات', icon: null },
-  { id: 'oils', slug: 'oils', name_en: 'Oils', name_ar: 'الزيوت', icon: Droplets },
-  { id: 'sauces', slug: 'sauces', name_en: 'Sauces', name_ar: 'الصلصات', icon: Soup },
-  { id: 'pickles', slug: 'pickles', name_en: 'Pickles', name_ar: 'المخللات', icon: Salad },
+  { id: 'all',         slug: 'all',         name_en: 'All Products', name_ar: 'جميع المنتجات', icon: LayoutGrid },
+  { id: 'fava_beans',  slug: 'fava_beans',  name_en: 'Fava Beans',   name_ar: 'فول مدمس',      icon: Leaf },
+  { id: 'tomato_paste',slug: 'tomato_paste',name_en: 'Tomato Paste', name_ar: 'معجون طماطم',   icon: Droplets },
 ];
 
 interface CategoryFilterProps {
@@ -45,7 +44,7 @@ export default function CategoryFilter({ activeCategory, onCategoryChange }: Cat
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            {Icon && <Icon className="w-5 h-5" />}
+            <Icon className="w-5 h-5" />
             {locale === 'ar' ? category.name_ar : category.name_en}
           </motion.button>
         );
